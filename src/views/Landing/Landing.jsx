@@ -13,7 +13,7 @@ function Landing() {
       <div className={style.landing}>
         <div className={style.imageContainer}>
           <img src={imgLanding} alt="Muebles y Accesorios" />
-          <h1 className={style.centeredText}>Muebles & Accesorios  </h1>
+          <h1 className={style.centeredText}>Muebles & Accesorios!  </h1>
           <h2 className={style.centered}> Make your interior, more minimalistic</h2>
         </div>
       </div>
