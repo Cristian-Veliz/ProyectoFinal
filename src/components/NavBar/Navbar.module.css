@@ -71,11 +71,13 @@
     text-decoration: none;
     text-align: center;
     margin-top: 3px;
-    margin-left: 7px;
-    
-   
-  
-   
+    margin-left: 7px;   
+  }
+
+  .cartContainer {
+    display: flex; /* Esto permitirá que el carrito y otros elementos en el contenedor se alineen horizontalmente */
+    align-items: center; /* Esto centrará verticalmente el carrito */
+    margin-left: auto; /* Empuja el carrito hacia la derecha */
   }
   
   .divLink {
@@ -110,3 +112,13 @@
     cursor: pointer;
     color: blanchedalmond;
   }
+
+  /* Cambia el color del número y el logo al rojo */
+.cartContainer span {
+  color: red;
+}
+
+.cartContainer img {
+  filter: invert(1); /* Invierte el color del logo a rojo */
+  
+}

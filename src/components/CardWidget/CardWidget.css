@@ -1,0 +1,15 @@
+.imgCarrito {
+    width: 4rem;
+}
+
+.CartWidget{
+    color: black;
+    text-decoration: none !important;
+
+}
+
+.CartWidget:hover{
+    color: black;
+    text-decoration: none;
+
+}
