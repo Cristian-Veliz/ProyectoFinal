@@ -1,0 +1,25 @@
+.contactanos{
+    margin: 15px;
+    
+}
+#formulario{
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+    text-align:center;
+    margin: 10px;
+    
+}
+
+#consulta{
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+   
+    text-align:center;
+    margin: 10px;
+}
+
+.margen{
+    margin-top: 30px;
+}
