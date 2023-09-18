@@ -4,7 +4,7 @@ import style from '../Detail/Detail.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFurnitures } from '../../components/redux/actions/Actions';
 
-const Detail = () => {
+const Detail = ({ cantidadTotal, actualizarCantidadTotal }) => { // Agregado cantidadTotal y actualizarCantidadTotal como props
   const { id } = useParams();
   const dispatch = useDispatch();
   const allFurnitures = useSelector((state) => state.allFurnitures);
@@ -42,6 +42,12 @@ const Detail = () => {
     }
   };
 
+  // Función para agregar al carrito y actualizar la cantidad total
+  const agregarAlCarrito = () => {
+    actualizarCantidadTotal(cantidadTotal + contador); // Actualiza la cantidad total
+    console.log(`Agregado al carrito: ${contador} ${name}`);
+  };
+
   return (
     <div key={id} className={style.container}>
       <div key={id} className={style.container}></div>
@@ -53,7 +59,7 @@ const Detail = () => {
         <h3>Description: {description}</h3>
         <h3>Price: {`${price} usd`}</h3>
         
-        <button onClick={() => console.log(`Agregado al carrito: ${contador} ${name}`)}>Agregar al carrito</button>
+        <button onClick={agregarAlCarrito}>Agregar al carrito</button>
         
         {/* Contador */}
         <div>
