@@ -1,61 +1,66 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-//import { getFurnitureById } from "../../components/redux/actions/Actions";
-import { useParams, Link } from "react-router-dom";
-import style from "./Detail.module.css";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import style from '../Detail/Detail.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllFurnitures } from '../../components/redux/actions/Actions';
 
 const Detail = () => {
-  const furniture = useSelector((state) => state.furt.furniture) || {};
-  const dispatch = useDispatch();
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const allFurnitures = useSelector((state) => state.allFurnitures);
+
+  const [contador, setContador] = useState(1); // Cambiado a 'contador'
 
   useEffect(() => {
-    // Llama a la acción getFurnitureById para obtener los detalles del producto
-    dispatch(getFurnitureById(id));
-  }, [dispatch, id]);
+    // Llama a la acción que obtiene todas las furnitures solo si no se han cargado aún
+    if (!allFurnitures.length) {
+      dispatch(getAllFurnitures());
+    }
+  }, [dispatch, allFurnitures]);
 
-  // Asegúrate de que measures esté definido y tenga las propiedades adecuadas
-  const measures = furniture.measures || {};
+  if (!allFurnitures.length) {
+    return <div>Loading...</div>;
+  }
+
+  const furniture = allFurnitures.find((item) => item.id === parseInt(id, 10));
+
+  if (!furniture) {
+    return <div>Furniture not found</div>;
+  }
+
+  const { image, name, price, colors, description } = furniture;
+  const colorString = Array.isArray(colors) ? colors.join(', ') : '';
+
+  // Funciones para aumentar y disminuir el contador
+  const aumentarContador = () => {
+    setContador(contador + 1);
+  };
+
+  const disminuirContador = () => {
+    if (contador > 1) {
+      setContador(contador - 1);
+    }
+  };
 
   return (
-    <div>
-      <div>
-        <img className={style.img} src={furniture.image} alt={furniture.name} />
-        <h1 className={style.name}>{furniture.name}</h1>
-        {/* Descripción */}
+    <div key={id} className={style.container}>
+      <div key={id} className={style.container}></div>
+      <div className={style.name}>
+        <img src={image} alt={name} />
+        <h3>ID: {id}</h3>
+        <h3>Name: {name}</h3>
+        <h3>Colors: {colorString}</h3>
+        <h3>Description: {description}</h3>
+        <h3>Price: {`${price} usd`}</h3>
+        
+        <button onClick={() => console.log(`Agregado al carrito: ${contador} ${name}`)}>Agregar al carrito</button>
+        
+        {/* Contador */}
         <div>
-          <h4 className={style.furniture}>$</h4>
-          <span className={style.span}>{furniture.price}</span>
-          <p className={style.description}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            natus, ipsum quo modi porro.
-          </p>
-          <h4 className={style.furniture}>Categoria:</h4>
-          <span className={style.span}>{furniture.category}</span>
-
-          <h4 className={style.furniture}>Color:</h4>
-          <span className={style.span}>{furniture.color}</span>
-
-          {/* Mostrar las medidas como cadena de texto */}
-          <h4 className={style.furniture}>Medidas:</h4>
-          <span className={style.span}>
-            Alto: {measures.height} cm, Ancho: {measures.width} cm, Profundidad: {measures.depth} cm
-          </span>
-
-          {/* Mostrar las medidas en una lista */}
-          <div>
-            <h3>Medidas</h3>
-            <ul className={style.measures}>
-              <li>Alto: {measures.height} cm</li>
-              <li>Ancho: {measures.width} cm</li>
-              <li>Profundidad: {measures.depth} cm</li>
-            </ul>
-          </div>
+          <button onClick={disminuirContador}>-</button>
+          <span>{contador}</span>
+          <button onClick={aumentarContador}>+</button>
         </div>
-        {/* Enlace de retorno a la página de inicio */}
-        <Link to="/productos">
-          <button className={style.button}>Products</button>
-        </Link>
       </div>
     </div>
   );

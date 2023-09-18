@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-//import reducer from "./Reducer";
+import reducer from './reducer.jsx';
 
 
 
@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-	//reducer,
+	reducer,
 	composeEnhancer(applyMiddleware(thunk))
 	// Esta linea permite hacer peticiones asíncronas a un server:
 );

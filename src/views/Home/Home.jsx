@@ -1,14 +1,25 @@
-import './Home.module.css';
-import CardContainer from '../../components/CardContainer/CardCointainer';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CardContainer from '../../components/CardContainer/CardContainer';
+import { getAllFurnitures } from '../../components/redux/actions/Actions';
 
 
 function Home() {
+
+  const dispatch = useDispatch();
+  const allFurnitures = useSelector((state) => state.allFurnitures);
+
+  useEffect(() => {
+    // Llamo a la acción que obtiene todas las furnitures
+    dispatch(getAllFurnitures()); 
+  }, [dispatch]);
+
   return (
     <div>
-      <h1>¡Estoy en mi Home!</h1>
-      <CardContainer/>
+      <CardContainer allFurnitures={allFurnitures} />
     </div>
   );
 }
 
 export default Home;
+

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from '../Card/Card.module.css';
-import furnitures from '../../helpers/Furnitures';
 
-const Card = () => {
-    const {id, name, image, color, category } = furnitures;
+
+const Card = ({id, name, image, colors, price}) => {
+
+const colorString = colors.join(', ');
+
   return (
     <div key={id} className={style.container}>
       <div className={style.header}></div>
@@ -16,8 +18,8 @@ const Card = () => {
       <div className={style.name}>
         <h3>ID: {id}</h3>
         <h3>Name: {name}</h3>
-        <h3>Color: {color}</h3>
-        <h3>Category: {category}</h3>
+        <h3>Colors: {colorString}</h3>
+        <h3>Price: {`${price} usd`}</h3>
       </div>
     </div>
   );
