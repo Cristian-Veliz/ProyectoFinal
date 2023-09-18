@@ -75,10 +75,13 @@
   }
 
   .cartContainer {
-    display: flex; /* Esto permitirá que el carrito y otros elementos en el contenedor se alineen horizontalmente */
-    align-items: center; /* Esto centrará verticalmente el carrito */
-    margin-left: auto; /* Empuja el carrito hacia la derecha */
+    display: flex;
+    align-items: center;
+    margin-top: -45px;
+    margin-left: 1700px; /* Empuja el carrito hacia la derecha */
+    margin-right: auto; /* Agrega espacio a la derecha del carrito */
   }
+  
   
   .divLink {
     display:inline-block;
