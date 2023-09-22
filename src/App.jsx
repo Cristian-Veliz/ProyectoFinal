@@ -9,6 +9,8 @@ import MyOrders from './views/MyOrders/MyOrders';
 import Contact from './views/Contact/Contact';
 import About from './views/About/About';
 import CardWidget from './components/CardWidget/CardWidget';
+import Cart from './components/Cart/Cart';
+import { CarritoProvider } from './components/Context/CartContext';
 
 function App() {
   const { pathname } = useLocation();
@@ -24,6 +26,7 @@ function App() {
   return (
     <div className="App">
       {pathname === '/' ? null : <NavBar cantidadTotal={cantidadTotal} />}
+      <CarritoProvider>
       <Switch>
         <Route exact path='/' component={Landing} />
         <Route exact path='/home' component={Home} />
@@ -40,9 +43,10 @@ function App() {
         <Route exact path='/orders' component={MyOrders} />
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/about' component={About} />
-        <Route exact path='/cart' component={CardWidget} />
+        <Route exact path='/cart' component={Cart} />
         {/* <Route exact path='*' component={NotFound}/> */}
       </Switch>
+      </CarritoProvider>
     </div>
   );
 }

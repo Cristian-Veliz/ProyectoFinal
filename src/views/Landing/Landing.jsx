@@ -60,14 +60,6 @@ function Landing() {
           </Carousel>
         </div>
       </div>
-      <div>
-        <img
-          className={style.publicidad}
-          src={imgDivanoPublicidad}
-          alt="DivanoPublicidad"
-        />
-      </div>
-
       <div className={`${style.carousel} ${style.secondCarousel}`}>
         <h1>Our Most Featured Products!</h1>
         <div className={style.productImages}>
@@ -92,6 +84,13 @@ function Landing() {
             <p>Baltico two-seater bed 🌟🌟🌟🌟</p>
           </div>
         </div>
+      </div>
+      <div>
+        <img
+          className={style.publicidad}
+          src={imgDivanoPublicidad}
+          alt="DivanoPublicidad"
+        />
       </div>
     </div>
   );

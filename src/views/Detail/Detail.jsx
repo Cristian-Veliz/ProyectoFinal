@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import style from '../Detail/Detail.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFurnitures } from '../../components/redux/actions/Actions';
+import { CartContext } from '../Context/CartContext'; 
 
-const Detail = ({ cantidadTotal, actualizarCantidadTotal }) => { // Agregado cantidadTotal y actualizarCantidadTotal como props
+const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const allFurnitures = useSelector((state) => state.allFurnitures);
+  const history = useHistory();
 
-  const [contador, setContador] = useState(1); // Cambiado a 'contador'
+  const { addItem } = useContext(CartContext); // Obtén la función addItem del contexto
+
+  const [contador, setContador] = useState(1);
+  const [productoAgregado, setProductoAgregado] = useState(false);
+  const [mostrarControles, setMostrarControles] = useState(true);
 
   useEffect(() => {
-    // Llama a la acción que obtiene todas las furnitures solo si no se han cargado aún
     if (!allFurnitures.length) {
       dispatch(getAllFurnitures());
     }
@@ -31,7 +36,6 @@ const Detail = ({ cantidadTotal, actualizarCantidadTotal }) => { // Agregado can
   const { image, name, price, colors, description } = furniture;
   const colorString = Array.isArray(colors) ? colors.join(', ') : '';
 
-  // Funciones para aumentar y disminuir el contador
   const aumentarContador = () => {
     setContador(contador + 1);
   };
@@ -42,10 +46,20 @@ const Detail = ({ cantidadTotal, actualizarCantidadTotal }) => { // Agregado can
     }
   };
 
-  // Función para agregar al carrito y actualizar la cantidad total
   const agregarAlCarrito = () => {
-    actualizarCantidadTotal(cantidadTotal + contador); // Actualiza la cantidad total
+    // Llama a la función addItem del contexto para agregar el producto al carrito
+    addItem(furniture, contador);
+    setProductoAgregado(true);
+    setMostrarControles(false);
     console.log(`Agregado al carrito: ${contador} ${name}`);
+  };
+
+  const redireccionarACarrito = () => {
+    history.push('/cart');
+  };
+
+  const redireccionarAHome = () => {
+    history.push('/home');
   };
 
   return (
@@ -53,23 +67,38 @@ const Detail = ({ cantidadTotal, actualizarCantidadTotal }) => { // Agregado can
       <div key={id} className={style.container}></div>
       <div className={style.name}>
         <img src={image} alt={name} />
-        <h3>ID: {id}</h3>
         <h3>Name: {name}</h3>
         <h3>Colors: {colorString}</h3>
         <h3>Description: {description}</h3>
         <h3>Price: {`${price} usd`}</h3>
-        
-        <button onClick={agregarAlCarrito}>Agregar al carrito</button>
-        
-        {/* Contador */}
+
         <div>
-          <button onClick={disminuirContador}>-</button>
-          <span>{contador}</span>
-          <button onClick={aumentarContador}>+</button>
+          {mostrarControles && (
+            <>
+              <button onClick={disminuirContador}>-</button>
+              <span>{contador}</span>
+              <button onClick={aumentarContador}>+</button>
+            </>
+          )}
         </div>
+
+        {productoAgregado && (
+          <div>
+            <button onClick={redireccionarAHome}>Seguir Comprando</button>
+            <button onClick={redireccionarACarrito}>Ver Carrito</button>
+          </div>
+        )}
+
+        {!productoAgregado && (
+          <div>
+            <button onClick={agregarAlCarrito}>Agregar al carrito</button>
+            <button onClick={redireccionarACarrito}>Comprar Ahora</button>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default Detail;
+

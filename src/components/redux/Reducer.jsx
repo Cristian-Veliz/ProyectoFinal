@@ -1,6 +1,8 @@
 import {
   GET_ALL_FURNITURES,
   GET_FURNITURES_BY_NAME,
+  FURNITURES_SORT_BY_NAME,
+  FILTER_BY_PRICE,
   PREV,
   NEXT,
 } from "./actions/ActionsTypes";
@@ -13,6 +15,8 @@ const initialState = {
   selectFurnitures: null,
   selectDbFurnitures: null,
   numPage: 1,
+  minPrice: "",
+  maxPrice: "",
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -30,6 +34,35 @@ export default function reducer(state = initialState, { type, payload }) {
       return {
         ...state,
         furnituresByName: payload,
+      };
+    case FURNITURES_SORT_BY_NAME:
+      const sortedFurnituresByName = [...state.allFurnitures];
+      sortedFurnituresByName.sort((a, b) => {
+        if (payload === "A") {
+          return a.name.localeCompare(b.name);
+        } else {
+          return b.name.localeCompare(a.name);
+        }
+      });
+      return {
+        ...state,
+        allFurnitures: sortedFurnituresByName,
+      };
+
+    case FILTER_BY_PRICE: 
+      const { minPrice, maxPrice } = payload;
+      const filteredFurnituresByPrice = state.temporal.filter((furniture) => {
+        const price = parseFloat(furniture.price);
+        return (
+          (isNaN(minPrice) || price >= minPrice) &&
+          (isNaN(maxPrice) || price <= maxPrice)
+        );
+      });
+      return {
+        ...state,
+        allFurnitures: filteredFurnituresByPrice,
+        minPrice, // Actualiza el estado del precio mínimo
+        maxPrice, // Actualiza el estado del precio máximo
       };
 
     case PREV:

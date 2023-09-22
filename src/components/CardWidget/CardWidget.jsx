@@ -2,6 +2,7 @@ import React from "react";
 import trolley from "./assets/trolley.png";
 import "./CardWidget.css";
 import { Link } from "react-router-dom";
+import { CartContext } from "../Context/CartContext";
 
 const CardWidget = ({ cantidadTotal }) => {
   return (

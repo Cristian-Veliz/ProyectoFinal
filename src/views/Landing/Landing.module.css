@@ -5,7 +5,8 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  width: 100%; 
+  width:max-content; 
+  
 }
 
 .centered {
@@ -43,14 +44,8 @@
   transition: transform 0.3s; 
 }
 
-body {
-  background-color: #423d3d;
-}
 
-/* Estilos para el segundo carrusel */
-.secondCarousel {
-  text-align: center;
-}
+
 
 .secondCarousel h1 {
   color: #fff;
@@ -78,7 +73,7 @@ body {
 }
 
 .productImages p {
-  color: #fff;
+  color: black;
   font-size: 16px;
   margin-top: 10px;
 }
@@ -107,7 +102,7 @@ h1{
   padding: 10px; 
   background-color: blanchedalmond;
   text-align: center; 
- 
+  margin-bottom: 50px;
 }
 
 .publicidad:hover {
@@ -116,3 +111,7 @@ h1{
   background-color: #0e0c0c;
   cursor: pointer; 
  }
+
+ body {
+  background-color: #333;
+}

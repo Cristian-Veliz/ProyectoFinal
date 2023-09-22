@@ -1,0 +1,42 @@
+/* FilterPrice.module.css */
+
+.filterPriceContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    left: 50px;
+  }
+  
+  .filterPriceContainer label {
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .filterPriceContainer input[type="number"] {
+    background-color: #333;
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+    height: 16px;
+    width: 150px;
+  }
+  
+  .filterPriceContainer button {
+    background-color: #333;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+  
+  }
+  
+  .filterPriceContainer button:hover {
+    color: #6f4e4ede
+    
+  }
+  

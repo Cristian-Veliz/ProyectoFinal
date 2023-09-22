@@ -1,0 +1,41 @@
+.eliminar{
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  justify-content: space-between;
+  margin: 10px;
+  border-radius: 7px;
+  padding: 10px;
+  border: 1px solid black ;
+}
+
+a{
+    margin: 20px;
+    color: black;
+    
+}
+a:hover{
+    color: black;
+
+}
+.finalizar{
+    border: 1px solid black;
+    margin: 15px;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;   
+}
+.medio{
+    margin: 20px;
+    margin: 15px;
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+
+}

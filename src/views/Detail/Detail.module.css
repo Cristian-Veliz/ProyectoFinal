@@ -1,19 +1,15 @@
-.bigDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+
   .container {
     width: 60%; 
+    top: -50px;
     height: auto; 
-    margin: 30px auto; 
+    margin: 20px auto; 
     border-radius: 20px;
     background-color: blanchedalmond;
     box-shadow: 0px 0px 10px #333333;
     position: relative;
     box-shadow: 15px 15px 15px 3px #333333;
-    
+    scale: 0.9;
   }
   
   .header {
@@ -22,20 +18,6 @@
     margin-bottom: 15px;
   }
   
-  .features {
-    background-color: #fff;
-    padding: 0.75px;
-    width: 60px; 
-    border-radius: 120px; 
-    -moz-border-radius: 120px; 
-    box-shadow: 0.75px 0.75px 7.5px #484848;
-  }
-  
-  .features img {
-    position: relative;
-    height: 50px;
-    width: 50px;
-  }
   
   .name {
     font-size: 15px;
@@ -49,6 +31,7 @@
     font-family: "Brush Script MT", cursive;
     color: #e55743;
     font-size: 18px;
+    margin-top: 20px;
   }
   
   .category {
@@ -69,6 +52,8 @@
     font-size: 15px;
     background-color: #333;
     color:whitesmoke;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   button:hover {
   color: #e55743;

@@ -9,7 +9,7 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => { // cantidadTota
       <nav className={style.navbar}>
         <div>
           <div className={style.logo}>
-            <Link to="/about">
+            <Link to="/home">
               <img src={LogoNav} alt="logo" />
             </Link>
           </div>

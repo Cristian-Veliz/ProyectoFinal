@@ -32,7 +32,7 @@ function handleChange(e) {
         type="text"
         name="name"
         id="name"
-        placeholder="Enter furniture"
+        placeholder="Find your favorite product"
         value={nameFurniture}
         onChange={handleChange}
       />

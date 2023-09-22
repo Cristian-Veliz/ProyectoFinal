@@ -1,27 +1,29 @@
 .container {
-    display: inline-flex;
+    display: inline-block;
     position: relative;
     justify-content: center;
     width: auto;
     height: auto;
     margin-top: 10px;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 .container input {
     height: 20px;
     width: 270px;
-    background-color: whitesmoke;
+    background-color: #333;
+    color: white;
+    padding: 10px;
     border-radius: 5px;
-    border: 2px gray solid;
-    margin-bottom: 3px;
-    position: relative;
+    position: blo;
     font-size: 15px;
+    border: 2px solid white;
 }
 
 .container button {
     display: inline-block;
-    margin: 1px;
+    margin: 7px;
     position: relative;
     align-items: center;
     justify-content: space-around;
@@ -33,19 +35,21 @@
     font-size: 15px;
     text-decoration: none;
     text-align: center;
-    margin-top: 3px;
-    margin-bottom: 2px;
+    margin-top: 7px;
+    margin-bottom: 3px;
     padding: 0; /* Eliminar el padding */
     line-height: 30px; /* Alinear verticalmente el texto */
+    border: 1px solid white;
 }
 
 
 .container button:hover {
-    color: #e55743;
+    color: #6f4e4ede;
     cursor: pointer;
 }
 
 .container input:focus {
-    background-color: whitesmoke;
-    color: black;
+    background-color: white;
+    color: #333;
+    
 }
