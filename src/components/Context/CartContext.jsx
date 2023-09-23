@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext({
   cart: [],
@@ -11,47 +11,108 @@ export const CarritoProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
   const [cantidadTotal, setCantidadTotal] = useState(0);
 
-  const addItem = (item, cantidad) => {
-    const productoExistente = cart.find((prod) => prod.item.id === item.id);
-
-    if (!productoExistente) {
-      setCart((prev) => [...prev, { item, cantidad }]);
-      setCantidadTotal((prev) => prev + cantidad);
-      setTotal((prev) => prev + item.price * cantidad);
-    } else {
-      const carritoActualizado = cart.map((prod) => {
-        if (prod.item.id === item.id) {
-          return { ...prod, cantidad: prod.cantidad + cantidad };
-        } else {
-          return prod;
-        }
-      });
-      setCart(carritoActualizado);
-      setCantidadTotal((prev) => prev + cantidad);
-      setTotal((prev) => prev + item.price * cantidad);
+  // Cargar el carrito desde localStorage al iniciar la aplicación
+  useEffect(() => {
+    const carritoGuardado = localStorage.getItem("carrito");
+    if (carritoGuardado) {
+      const carritoParseado = JSON.parse(carritoGuardado);
+      setCart(carritoParseado.cart);
+      setTotal(carritoParseado.total);
+      setCantidadTotal(carritoParseado.cantidadTotal);
     }
+  }, []);
+
+  // Función para guardar el carrito en localStorage
+  const guardarCarritoEnLocalStorage = (carrito, nuevoTotal, nuevaCantidadTotal) => {
+    localStorage.setItem(
+      "carrito",
+      JSON.stringify({ cart: carrito, total: nuevoTotal, cantidadTotal: nuevaCantidadTotal })
+    );
+    console.log("Carrito guardado en localStorage:", {
+      cart: carrito,
+      total: nuevoTotal,
+      cantidadTotal: nuevaCantidadTotal,
+    });
+  };
+
+  const addItem = (item, cantidad) => {
+    const productoExistenteIndex = cart.findIndex(
+      (prod) => prod.item.id === item.id
+    );
+
+    if (productoExistenteIndex === -1) {
+      const nuevoProducto = { item, cantidad };
+      const nuevoCarrito = [...cart, nuevoProducto];
+
+      // Actualiza las cantidades totales
+      const nuevoTotal = total + item.price * cantidad;
+      const nuevaCantidadTotal = cantidadTotal + cantidad;
+
+      setCart(nuevoCarrito);
+      setCantidadTotal(nuevaCantidadTotal);
+      setTotal(nuevoTotal);
+
+      // Guardar en localStorage cada vez que se agrega un producto
+      guardarCarritoEnLocalStorage(nuevoCarrito, nuevoTotal, nuevaCantidadTotal);
+    } else {
+      const carritoActualizado = [...cart];
+      carritoActualizado[productoExistenteIndex].cantidad += cantidad;
+
+      // Actualiza las cantidades totales
+      const nuevoTotal = total + item.price * cantidad;
+      const nuevaCantidadTotal = cantidadTotal + cantidad;
+
+      setCart(carritoActualizado);
+      setCantidadTotal(nuevaCantidadTotal);
+      setTotal(nuevoTotal);
+
+      // Guardar en localStorage cada vez que se actualiza un producto existente
+      guardarCarritoEnLocalStorage(carritoActualizado, nuevoTotal, nuevaCantidadTotal);
+    }
+
+    console.log("Producto agregado al carrito:", {
+      item,
+      cantidad,
+      cart,
+      total,
+      cantidadTotal,
+    });
   };
 
   const eliminarProducto = (id) => {
     const productoEliminado = cart.find((prod) => prod.item.id === id);
     const carritoActualizado = cart.filter((prod) => prod.item.id !== id);
+
+    // Actualiza las cantidades totales
+    const nuevoTotal = total - productoEliminado.item.price * productoEliminado.cantidad;
+    const nuevaCantidadTotal = cantidadTotal - productoEliminado.cantidad;
+
     setCart(carritoActualizado);
-    setCantidadTotal((prev) => prev - productoEliminado.cantidad);
-    setTotal(
-      (prev) =>
-        prev - productoEliminado.item.price * productoEliminado.cantidad
-    );
+    setTotal(nuevoTotal);
+    setCantidadTotal(nuevaCantidadTotal);
+
+    // Guardar en localStorage cada vez que se elimina un producto
+    guardarCarritoEnLocalStorage(carritoActualizado, nuevoTotal, nuevaCantidadTotal);
+
+    console.log("Producto eliminado del carrito:", {
+      id,
+      cart: carritoActualizado,
+      total: nuevoTotal,
+      cantidadTotal: nuevaCantidadTotal,
+    });
   };
 
   const vaciarCarrito = () => {
+    // Limpiar el estado del carrito
     setCart([]);
     setCantidadTotal(0);
     setTotal(0);
-  };
 
-  console.log("CarritoProvider - cart:", cart);
-  console.log("CarritoProvider - cantidadTotal:", cantidadTotal);
-  console.log("CarritoProvider - total:", total);
+    // Limpiar localStorage cuando se vacía el carrito
+    localStorage.removeItem("carrito");
+
+    console.log("Carrito vacio y localStorage limpio");
+  };
 
   return (
     <CartContext.Provider
