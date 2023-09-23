@@ -116,9 +116,12 @@
     color: blanchedalmond;
   }
 
-  /* Cambia el color del número y el logo al rojo */
+  /* Cambia el color del número y el logo  */
 .cartContainer span {
-  color: red;
+  color: white;
+  font-size: 18px;
+  background-color: #333;
+  border:0.1px solid rgb(201, 201, 157);
 }
 
 .cartContainer img {

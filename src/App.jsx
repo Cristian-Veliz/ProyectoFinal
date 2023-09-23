@@ -25,33 +25,50 @@ function App() {
 
   return (
     <div className="App">
-      {pathname === '/' ? null : <NavBar cantidadTotal={cantidadTotal} />}
       <CarritoProvider>
-      <Switch>
-        <Route exact path='/' component={Landing} />
-        <Route exact path='/home' component={Home} />
-        <Route
-          exact path='/products/:id'
-          render={(props) => (
-            <Detail
-              {...props}
-              actualizarCantidadTotal={actualizarCantidadTotal}
-              cantidadTotal={cantidadTotal}
-            />
-          )}
-        />
-        <Route exact path='/orders' component={MyOrders} />
-        <Route exact path='/contact' component={Contact} />
-        <Route exact path='/about' component={About} />
-        <Route exact path='/cart' component={Cart} />
-        {/* <Route exact path='*' component={NotFound}/> */}
-      </Switch>
+        {pathname === '/' ? null : (
+          <NavBar
+            cantidadTotal={cantidadTotal}
+            actualizarCantidadTotal={actualizarCantidadTotal}
+          />
+        )}
+        <Switch>
+          <Route exact path='/' component={Landing} />
+          <Route exact path='/home' component={Home} />
+          <Route
+            exact
+            path='/products/:id'
+            render={(props) => (
+              <Detail
+                {...props}
+                actualizarCantidadTotal={actualizarCantidadTotal}
+                cantidadTotal={cantidadTotal}
+              />
+            )}
+          />
+          <Route exact path='/orders' component={MyOrders} />
+          <Route exact path='/contact' component={Contact} />
+          <Route exact path='/about' component={About} />
+          <Route
+            exact
+            path='/cart'
+            render={(props) => (
+              <Cart
+                {...props}
+                actualizarCantidadTotal={actualizarCantidadTotal}
+                cantidadTotal={cantidadTotal}
+              />
+            )}
+          />
+        </Switch>
       </CarritoProvider>
     </div>
   );
 }
 
 export default App;
+
+
 
 
 

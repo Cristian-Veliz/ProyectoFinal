@@ -3,15 +3,15 @@ import { useParams, useHistory } from 'react-router-dom';
 import style from '../Detail/Detail.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFurnitures } from '../../components/redux/actions/Actions';
-import { CartContext } from '../Context/CartContext'; 
+import { CartContext } from '../../components/Context/CartContext';
 
-const Detail = () => {
+const Detail = ({ actualizarCantidadTotal, cantidadTotal }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const allFurnitures = useSelector((state) => state.allFurnitures);
   const history = useHistory();
 
-  const { addItem } = useContext(CartContext); // Obtén la función addItem del contexto
+  const { addItem } = useContext(CartContext); // Obtengo la función addItem del contexto
 
   const [contador, setContador] = useState(1);
   const [productoAgregado, setProductoAgregado] = useState(false);
@@ -47,11 +47,15 @@ const Detail = () => {
   };
 
   const agregarAlCarrito = () => {
-    // Llama a la función addItem del contexto para agregar el producto al carrito
+    // Se llama a la función addItem del contexto para agregar el producto al carrito
     addItem(furniture, contador);
     setProductoAgregado(true);
     setMostrarControles(false);
     console.log(`Agregado al carrito: ${contador} ${name}`);
+
+    // Actualiza la cantidad total en el contexto directamente
+    const nuevaCantidadTotal = cantidadTotal + contador;
+    actualizarCantidadTotal(nuevaCantidadTotal);
   };
 
   const redireccionarACarrito = () => {
@@ -92,7 +96,7 @@ const Detail = () => {
         {!productoAgregado && (
           <div>
             <button onClick={agregarAlCarrito}>Agregar al carrito</button>
-            <button onClick={redireccionarACarrito}>Comprar Ahora</button>
+            <button onClick={redireccionarAHome}>Productos</button>
           </div>
         )}
       </div>
@@ -101,4 +105,3 @@ const Detail = () => {
 };
 
 export default Detail;
-

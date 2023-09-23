@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import style from './NavBar.module.css';
 import LogoNav from '../../assets/LogoNav.jpg';
 import CardWidget from '../CardWidget/CardWidget';
+import { CartContext } from "../Context/CartContext";
 
-const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => { // cantidadTotal y actualizarCantidadTotal como props
+const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
   return (
     <div className={style.mainContainer}>
       <nav className={style.navbar}>
@@ -40,7 +41,6 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => { // cantidadTota
           </div>
           <nav>
             <div className={style.cartContainer}>
-              {/* Pasa las props cantidadTotal y actualizarCantidadTotal a CardWidget */}
               <CardWidget cantidadTotal={cantidadTotal} actualizarCantidadTotal={actualizarCantidadTotal} />
             </div>
           </nav>
