@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import style from './NavBar.module.css';
 import LogoNav from '../../assets/LogoNav.jpg';
+
+
 import CardWidget from '../CardWidget/CardWidget';
 import { CartContext } from "../Context/CartContext";
 

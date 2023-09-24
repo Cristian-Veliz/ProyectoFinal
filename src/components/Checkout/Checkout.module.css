@@ -1,0 +1,68 @@
+/* Checkout.module.css */
+
+.formulario {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .descripcion {
+    margin: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    margin: 40px;
+  }
+  
+  .finalizar {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+    border-radius: 7px;
+    padding: 2px;
+  }
+  
+  .orden {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    padding: 50px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  input,
+  textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .orderId {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color:yellow;
+    margin-top: -10px;
+    font-size: 25px;
+    height: 100px;
+    width: 300px;
+    margin-left: 70px;
+  }
+  

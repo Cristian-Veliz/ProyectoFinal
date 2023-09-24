@@ -125,6 +125,6 @@
 }
 
 .cartContainer img {
-  filter: invert(1); /* Invierte el color del logo a rojo */
-  
+  filter: invert(); 
+
 }

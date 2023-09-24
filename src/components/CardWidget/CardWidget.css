@@ -6,7 +6,7 @@
 
 /* Estilo para la imagen del carrito */
 .imgCarrito {
-    width: 4rem;
+    width: 2.4rem;
 }
 
 /* Estilo para el número de la cantidad */
@@ -14,8 +14,11 @@
     position: absolute;
     top: -10px; /* Ajusta la posición vertical según tus necesidades */
     right: -10px; /* Ajusta la posición horizontal según tus necesidades */
-    background-color: red; /* Cambia el color del fondo si es necesario */
-    color: white; /* Cambia el color del texto si es necesario */
+    color: #333; /* Cambia el color del texto si es necesario */
     border-radius: 50%; /* Hace que el fondo del número sea redondo */
     padding: 3px 7px; /* Añade espacio alrededor del número */
+}
+
+.imgCarrito:hover {
+    scale: 1.30;
 }

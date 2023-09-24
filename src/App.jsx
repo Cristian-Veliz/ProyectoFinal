@@ -10,6 +10,7 @@ import Contact from './views/Contact/Contact';
 import About from './views/About/About';
 import CardWidget from './components/CardWidget/CardWidget';
 import Cart from './components/Cart/Cart';
+import Checkout from './components/Checkout/Checkout';
 import { CarritoProvider } from './components/Context/CartContext';
 
 function App() {
@@ -49,16 +50,17 @@ function App() {
           <Route exact path='/orders' component={MyOrders} />
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
+          <Route exact path='/checkout' component={Checkout} /> 
           <Route
             exact
             path='/cart'
             render={(props) => (
               <Cart
-                {...props}
-                actualizarCantidadTotal={actualizarCantidadTotal}
-                cantidadTotal={cantidadTotal}
+              {...props}
+              actualizarCantidadTotal={actualizarCantidadTotal}
+              cantidadTotal={cantidadTotal}
               />
-            )}
+              )}
           />
         </Switch>
       </CarritoProvider>

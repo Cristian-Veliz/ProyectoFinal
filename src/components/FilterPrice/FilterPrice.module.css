@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     margin: 10px;
-    left: 50px;
+    left: 40px;
   }
   
   .filterPriceContainer label {
@@ -22,9 +22,11 @@
     margin-right: 10px;
     height: 16px;
     width: 150px;
+    margin-top: 14px;
   }
   
   .filterPriceContainer button {
+   
     background-color: #333;
     color: white;
     border: 1px solid white;
@@ -32,6 +34,7 @@
     font-size: 14px;
     text-align: center;
     cursor: pointer;
+ 
   
   }
   
