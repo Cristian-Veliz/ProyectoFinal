@@ -71,7 +71,7 @@ function App() {
 export default App;
 
 
-
+//agregar boton de My profile y Logout al lado izquierdo del logo del carrito, en un div aparte siguiendo el css de la nav. 
 
 
 
