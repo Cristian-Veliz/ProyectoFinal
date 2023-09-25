@@ -4,6 +4,7 @@ import {
   GET_FURNITURES_BY_NAME,
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
+  LOGIN_SUCCESS,
   PREV,
   NEXT,
 } from "./ActionsTypes";
@@ -66,3 +67,13 @@ export function next() {
     type: NEXT,
   };
 }
+export const loginSuccess = (form) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("http://localhost:3001/auth/login", form);
+      const { tokenSession } = response.data;
+      dispatch({ type: LOGIN_SUCCESS, payload: tokenSession });
+    } catch (error) {
+      console.error("Error de inicio de sesión:", error)}
+  };
+};

@@ -3,6 +3,7 @@ import {
   GET_FURNITURES_BY_NAME,
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
+  LOGIN_SUCCESS,
   PREV,
   NEXT,
 } from "./actions/ActionsTypes";
@@ -17,6 +18,7 @@ const initialState = {
   numPage: 1,
   minPrice: "",
   maxPrice: "",
+  token: null,
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -75,6 +77,12 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         numPage: state.numPage + 1,
       };
+
+      case LOGIN_SUCCESS:
+        return {
+          ...state,
+          token: payload,
+        };
 
     default:
       return { ...state };

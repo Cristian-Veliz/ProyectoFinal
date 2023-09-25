@@ -12,7 +12,7 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
       <nav className={style.navbar}>
         <div>
           <div className={style.logo}>
-            <Link to="/home">
+            <Link to="/">
               <img src={LogoNav} alt="logo" />
             </Link>
           </div>

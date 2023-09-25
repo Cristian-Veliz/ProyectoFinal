@@ -1,15 +1,20 @@
 import React, { createContext, useState, useEffect } from "react";
 
-export const CartContext = createContext({
-  cart: [],
-  total: 0,
-  cantidadTotal: 0,
-});
+export const CartContext = createContext(
+//   {
+//   cart: [],
+//   total: 0,
+//   cantidadTotal: 0,
+// }
+);
 
 export const CarritoProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [cantidadTotal, setCantidadTotal] = useState(0);
+  const [recoveryOpen, setRecoveryOpen] = useState(false);
+    const openRecovery = ()=>setRecoveryOpen(true);
+    const closeRecovery = ()=>setRecoveryOpen(false);
 
   // Cargar el carrito desde localStorage al iniciar la aplicación
   useEffect(() => {
@@ -123,6 +128,9 @@ export const CarritoProvider = ({ children }) => {
         vaciarCarrito,
         total,
         cantidadTotal,
+        recoveryOpen,
+        openRecovery,
+        closeRecovery
       }}
     >
       {children}
