@@ -12,6 +12,8 @@ import CardWidget from './components/CardWidget/CardWidget';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
 import { CarritoProvider } from './components/Context/CartContext';
+import Login from './views/Login/Login';
+import NewPassword from './components/NewPassword/NewPassword';
 
 function App() {
   const { pathname } = useLocation();
@@ -51,6 +53,8 @@ function App() {
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
           <Route exact path='/checkout' component={Checkout} /> 
+          <Route exact path='/login' component={Login} /> 
+          <Route exact path='/newPassword' component={NewPassword} /> 
           <Route
             exact
             path='/cart'
