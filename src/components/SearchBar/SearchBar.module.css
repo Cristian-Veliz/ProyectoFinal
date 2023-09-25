@@ -1,55 +1,60 @@
 .container {
-    display: inline-block;
-    position: relative;
-    justify-content: center;
-    width: auto;
-    height: auto;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
     margin-top: 10px;
     cursor: pointer;
-    margin-bottom: 30px;
-}
-
-.container input {
+  }
+  
+  .container input {
     height: 20px;
     width: 270px;
     background-color: #333;
     color: white;
     padding: 10px;
     border-radius: 5px;
-    position: blo;
     font-size: 15px;
     border: 2px solid white;
-}
-
-.container button {
-    display: inline-block;
+  }
+  
+  .container .buttonContainer {
+    display: flex;
+    align-items: center; 
+    margin-top: 7px;
+  }
+  
+  .container button {
     margin: 7px;
-    position: relative;
-    align-items: center;
-    justify-content: space-around;
     background-color: #333333;
     color: azure;
     height: 30px;
-    width: 100px;
+    width: 80px; 
     font: oblique bold 100% cursive;
     font-size: 15px;
-    text-decoration: none;
     text-align: center;
-    margin-top: 7px;
     margin-bottom: 3px;
-    padding: 0; /* Eliminar el padding */
+    padding: 0; 
     line-height: 30px; /* Alinear verticalmente el texto */
     border: 1px solid white;
-}
-
-
-.container button:hover {
+  }
+  
+  .container button:hover {
     color: #6f4e4ede;
     cursor: pointer;
-}
-
-.container input:focus {
+  }
+  
+  .container input:focus {
     background-color: white;
     color: #333;
-    
-}
+  }
+  
+  /* Estilos para el botón de búsqueda */
+  .searchButton {
+    width: 120px; 
+  }
+  
+  /* Estilos para el botón "All" */
+  .allButton {
+    width: 60px; 
+  }
+  
