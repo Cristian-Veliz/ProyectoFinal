@@ -33,7 +33,7 @@ export default function RecoveryEmail() {
         continuar.
       </h3>
       <input
-        type="text"
+        type="email"
         placeholder="Correo Electrónico"
         value={email}
         onChange={(e) => setEmail(e.target.value)}

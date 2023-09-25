@@ -1,23 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../../components/redux/actions/Actions";
-
 import { useHistory } from "react-router-dom";
-import RecoveryEmail from "../../components/NewPassword/RecoveryEmail";
-import { CartContext } from "../../components/Context/CartContext";
-import styles from "./Form.module.css";
-import validation from "./validation";
+import styles from "../../views/Login/Form.module.css";
+import validation from "../../views/Login/validation";
 import Logo from "../../assets/LogoDivano.jpg";
-import { Link } from "react-router-dom";
+import axios from "axios";
 
-export default function Login() {
-  const context = useContext(CartContext);
+
+export default function Register() {
+  
   const [userData, setUserData] = useState({
     email: "",
     password: "",
+    name:"",
   });
   const [errors, setErrors] = useState({});
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleChange = (event) => {
@@ -29,22 +26,29 @@ export default function Login() {
     setErrors(validation({ ...userData, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(loginSuccess(userData));
-    history.push("/");
-  };
-
+    if (Object.keys(errors).length === 0) {
+      try {
+        const response = await axios.post("http://localhost:3001/auth/register", userData);
+        // const { name } = response.data;
+        console.log("ddddd", response.data);
+        history.push("/");
+        // alert(`Bienvenido ${name}`);
+      } catch (error) {
+        console.error("Error de inicio de sesión:", error);
+      }
+    }}
 
 //   const handleLogin = () => {
 //     dispatch(loginSuccess(userData));
 //     history.push("/");
 //   };
-const isButtonDisabled = !userData.email || !userData.password;
+const isButtonDisabled = !userData.email || !userData.password || !userData.name;
 
-  const detailToShow = () => {
-    context.openRecovery();
-  };
+  // const detailToShow = () => {
+  //   context.openRecovery();
+  // };
 
   return (
     <div>
@@ -53,7 +57,14 @@ const isButtonDisabled = !userData.email || !userData.password;
           <img src={Logo} alt="Logo" />
         </div>
         <form onSubmit={handleSubmit}>
-          <h1>Iniciar Sesión</h1> {/* Título */}
+          <h1>Bienvenido</h1> {/* Título */}
+          <label>Name: </label>
+          <input
+            type="text"
+            name="name"
+            value={userData.name}
+            onChange={handleChange}
+          />
           <label>Email: </label>
           <input
             type="text"
@@ -72,17 +83,11 @@ const isButtonDisabled = !userData.email || !userData.password;
           <p className={styles.errors}>
             {errors.password ? errors.password : null}
           </p>
-          <button type="submit" disabled={isButtonDisabled}>Iniciar Sesión</button>
-          <Link onClick={detailToShow}>Olvide contraseña</Link>
-          <p className={styles.cuenta}>
-            ¿No sos cliente?
-            <Link to="/register" className={styles.cuenta}>
-              Abrí tu cuenta en minutos
-            </Link>
-          </p>
+          <button type="submit" disabled={isButtonDisabled}>Crear Cuenta</button>
+          
         </form>
       </div>
-        <RecoveryEmail />
+      
     </div>
   );
 }
