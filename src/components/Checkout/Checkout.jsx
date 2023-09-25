@@ -27,6 +27,12 @@ const Checkout = () => {
       return;
     }
 
+    // Validar que el teléfono sea mayor o igual a cero
+    if (telefono < 0) {
+      setError("El número de teléfono no puede ser negativo");
+      return;
+    }
+
     const orden = {
       items: cart.map((producto) => ({
         id: producto.item.id,
@@ -69,12 +75,12 @@ const Checkout = () => {
     <div className={styles.formulario}>
       <h2>Checkout</h2>
       <form onSubmit={manejadorFormulario}>
-        {cart.map((producto) => (
-          <div key={producto.item.id} className={styles.descripcion}>
+        {cart.map((producto, index) => (
+          <div key={index} className={styles.descripcion}>
             <p>
-              {producto.item.nombre}: {producto.cantidad} unidades
+              {producto.item.name}: {producto.cantidad}  unidades
             </p>
-            <p>Precio: ${producto.item.precio}</p>
+            <p style={{ color: "red" }}>Precio Final: U$S {producto.item.price}</p>
           </div>
         ))}
         <hr />
@@ -97,19 +103,22 @@ const Checkout = () => {
           <input
             type="text"
             id="apellido"
+            placeholder="Ingrese su apellido"
             value={apellido}
             onChange={(e) => setApellido(e.target.value)}
             required
           />
         </div>
 
-        <div className={styles.formGroup}>
+        <div className={styles.telefono}>
           <label htmlFor="telefono">Teléfono</label>
-          <input
-            type="text"
+          <input className={styles.telefono}
+            type="number"
             id="telefono"
+            placeholder="Ingrese su número de contacto"
             value={telefono}
             onChange={(e) => setTelefono(e.target.value)}
+            min="0"
             required
           />
         </div>
@@ -119,6 +128,7 @@ const Checkout = () => {
           <input
             type="email"
             id="email"
+            placeholder="Ingrese su correo electrónico"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -130,6 +140,7 @@ const Checkout = () => {
           <input
             type="email"
             id="emailConfirmacion"
+            placeholder="Confirme su correo electrónico"
             value={emailConfirmacion}
             onChange={(e) => setEmailConfirmacion(e.target.value)}
             required
@@ -141,6 +152,7 @@ const Checkout = () => {
           <input
             type="text"
             id="direccion"
+            placeholder="Ingrese su Dirección"
             value={direccion}
             onChange={(e) => setDireccion(e.target.value)}
           />
@@ -150,6 +162,7 @@ const Checkout = () => {
           <label htmlFor="nota">Nota</label>
           <textarea
             id="nota"
+            placeholder="Ingrese un recordatorio si lo desea"
             value={nota}
             onChange={(e) => setNota(e.target.value)}
           />
@@ -167,12 +180,12 @@ const Checkout = () => {
             ¡Gracias por tu compra!✅ Tu número de Orden es: #{ordenId}
           </div>
         )}
-   
       </div>
     </div>
   );
 };
 
 export default Checkout;
+
 
 

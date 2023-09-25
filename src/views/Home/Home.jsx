@@ -6,31 +6,10 @@ import { getAllFurnitures } from '../../components/redux/actions/Actions';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import OrderByName from '../../components/OrderByName/OrderByName';
 import FilterPrice from '../../components/FilterPrice/FilterPrice';
-// import { categoryFilter } from '../../helpers/categoryFilter';
+import {categoryFilter}  from '../../helpers/categoryFilter';
 import FilterCategory from '../../components/FilterCategory/FilterCategory';
 
-const categoryFilter = [
-  {
-    id: 1,
-    categoria: "sala de estar",
-  },
-  {
-    id: 2,
-    categoria: "dormitorios",
-  },
-  {
-    id: 3,
-    categoria: "sala de estudio",
-  },
-  {
-    id: 4,
-    categoria: "sala de comedor",
-  },
-  {
-    id: 5,
-    categoria: "accesorios",
-  },
-];
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -59,15 +38,13 @@ function Home() {
     setFilteredCategory(selectedCategory);
   };
 
-  // Aplicar el filtro de categoría
-  const filteredFurnituresByCategory = filteredCategory === 'all'
+// Aplicar el filtro de categoría
+const filteredFurnituresByCategory = filteredCategory === 'all'
   ? filteredFurnitures
   : filteredFurnitures.filter((furniture) => {
-      const furnitureCategory = categoryFilter.find(
-        (category) => category.id === furniture.id
-      );
-      return furnitureCategory && furnitureCategory.categoria === filteredCategory;
+      return furniture.Categories.some((category) => category.name === filteredCategory);
     });
+
 
 
   console.log('filteredCategory:', filteredCategory);

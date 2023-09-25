@@ -9,13 +9,13 @@ const CardContainer = ({ allFurnitures }) => {
   const furnitures = allFurnitures;
   const cantRecipesPage = 9;
 
-  // Agregar estado local para controlar el orden por precio
+  // estado local para controlar el orden por precio
   const [sortByPrice, setSortByPrice] = useState(false);
 
   let desde = (numPage - 1) * cantRecipesPage;
   let hasta = numPage * cantRecipesPage;
 
-  // Crear una variable para almacenar el array de muebles ordenado por precio
+  // variable para almacenar el array de muebles ordenado por precio
   const sortedFurnitures = sortByPrice
     ? [...furnitures].sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
     : [...furnitures];
@@ -32,7 +32,7 @@ const CardContainer = ({ allFurnitures }) => {
           name={furniture.name}
           colors={furniture.colors}
           price={furniture.price}
-          category={furniture.category}
+          Categories={furniture.Categories}
         />
       ))}
       <div>

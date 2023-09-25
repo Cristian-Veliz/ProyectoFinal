@@ -15,8 +15,8 @@ const FilterCategory = ({ allCategories, onFilterChange }) => {
       <span>Filter by Category:</span>
       <select className={style.selectStyle} value={selectedCategory} onChange={handleCategoryChange}>
         <option value="all">All Categories</option>
-        {allCategories.map((category,index) => (
-          <option key={index} value={category.id}>
+        {allCategories.map((category) => (
+          <option key={category.id} value={category.categoria}>
             {category.categoria}
           </option>
         ))}
