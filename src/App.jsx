@@ -11,9 +11,8 @@ import About from './views/About/About';
 import CardWidget from './components/CardWidget/CardWidget';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
+import Form from './components/FormLogin/Form';
 import { CarritoProvider } from './components/Context/CartContext';
-import Login from './views/Login/Login';
-import NewPassword from './components/NewPassword/NewPassword';
 
 function App() {
   const { pathname } = useLocation();

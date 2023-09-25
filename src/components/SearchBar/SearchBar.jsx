@@ -27,17 +27,20 @@ function handleChange(e) {
 
 
   return (
-    <form className={style.container} onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        placeholder="Find your favorite product"
-        value={nameFurniture}
-        onChange={handleChange}
-      />
-      <button type="submit">Search</button>
-      <button type="submit" onClick={handleClickFurnitures}>All</button>
-    </form>
-  );
+<form className={style.container} onSubmit={handleSubmit}>
+  <input
+    type="text"
+    name="name"
+    id="name"
+    placeholder="Find your favorite product"
+    value={nameFurniture}
+    onChange={handleChange}
+  />
+  <div className={style.buttonContainer}>
+    <button type="submit" className={style.searchButton}>Search</button>
+    <button type="button" onClick={handleClickFurnitures} className={style.allButton}>All</button>
+  </div>
+</form>
+
+  )
 }

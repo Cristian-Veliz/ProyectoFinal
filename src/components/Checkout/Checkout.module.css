@@ -26,9 +26,9 @@
     margin-left: 40px;
     border-radius: 7px;
     padding: 10px;
-    background-color: rgb(100, 119, 245);
-    border: 1px solid #ccc;
-    color:beige;
+    background-color:#0056b3;
+    border: 1px solid #333;
+    color:whitesmoke;
   }
   
   .orden {
@@ -90,9 +90,9 @@
 
 .finalizar:hover {
   transform: scale(1.1);
-  background-color: rgb(100, 119, 245);
+  background-color: #0056b3;
   border: 1px solid #ccc;
-  color:beige;
+ 
 
 }
 .products{

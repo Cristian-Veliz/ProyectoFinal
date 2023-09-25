@@ -12,25 +12,26 @@ const Checkout = () => {
   const [emailConfirmacion, setEmailConfirmacion] = useState("");
   const [direccion, setDireccion] = useState("");
   const [nota, setNota] = useState("");
-  const [error, setError] = useState("");
+  const [errorNombre, setErrorNombre] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
   const [ordenId, setOrdenId] = useState("");
 
   const manejadorFormulario = (event) => {
     event.preventDefault();
 
     if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
-      setError("Por favor complete todos los campos");
+      setErrorNombre("Por favor complete todos los campos");
       return;
     }
 
     if (email !== emailConfirmacion) {
-      setError("Los campos del email no coinciden");
+      setErrorEmail("Los campos del email no coinciden");
       return;
     }
 
     // Validar que el teléfono sea mayor o igual a cero
     if (telefono < 0) {
-      setError("El número de teléfono no puede ser negativo");
+      setErrorNombre("El número de teléfono no puede ser negativo");
       return;
     }
 
@@ -55,7 +56,8 @@ const Checkout = () => {
     // Almacenar la orden de compra en localStorage en formato JSON
     localStorage.setItem("ordenDeCompra", JSON.stringify(orden));
 
-    setError(""); // Borra el mensaje de error
+    setErrorNombre(""); // Borra el mensaje de error del nombre
+    setErrorEmail(""); // Borra el mensaje de error del email
     const ordenIdAleatorio = Math.floor(Math.random() * 10000) + 1;
     setOrdenId(String(ordenIdAleatorio)); // Simulación de un ID de orden
 
@@ -72,6 +74,25 @@ const Checkout = () => {
     setNota("");
   };
 
+  // Función para validar el campo de nombre en tiempo real
+  const validateName = (value) => {
+    if (value.length < 2 || value.length > 25) {
+      return 'El nombre no puede ser menor a 2 caracteres o tener más de 25 caracteres';
+    } else if (/[-*$%@+]/.test(value)) {
+      return 'El nombre no puede contener caracteres especiales (- * $ % @ +)';
+    }
+    return '';
+  };
+
+  // Función para validar el campo de correo electrónico en tiempo real
+  const validateEmail = (value) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if (!emailRegex.test(value)) {
+      return 'Ingrese una dirección de correo electrónico válida';
+    }
+    return '';
+  };
+
   return (
     <div className={styles.formulario}>
       <h2>Checkout</h2>
@@ -79,7 +100,7 @@ const Checkout = () => {
         {cart.map((producto, index) => (
           <div key={index} className={styles.descripcion}>
             <p>
-              {producto.item.name}: {producto.cantidad}  unidades
+              {producto.item.name}: {producto.cantidad} unidades
             </p>
             <p style={{ color: "red" }}>Precio Final: U$S {producto.item.price}</p>
           </div>
@@ -88,15 +109,18 @@ const Checkout = () => {
 
         <div className={styles.formGroup}>
           <label htmlFor="nombre">Nombre</label>
-          
           <input
             type="text"
             id="nombre"
             placeholder="Ingrese su nombre"
             value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            onChange={(e) => {
+              setNombre(e.target.value);
+              setErrorNombre(validateName(e.target.value)); // Validar en tiempo real
+            }}
             required
           />
+          {errorNombre && <p style={{ color: "blue" }}>{errorNombre}</p>}
         </div>
 
         <div className={styles.formGroup}>
@@ -113,7 +137,7 @@ const Checkout = () => {
 
         <div className={styles.telefono}>
           <label htmlFor="telefono">Teléfono</label>
-          <input className={styles.telefono}
+          <input
             type="number"
             id="telefono"
             placeholder="Ingrese su número de contacto"
@@ -131,9 +155,13 @@ const Checkout = () => {
             id="email"
             placeholder="Ingrese su correo electrónico"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setErrorEmail(validateEmail(e.target.value)); // Validar en tiempo real
+            }}
             required
           />
+          {errorEmail && <p style={{ color: "blue" }}>{errorEmail}</p>}
         </div>
 
         <div className={styles.formGroup}>
@@ -169,15 +197,14 @@ const Checkout = () => {
           />
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
         <button type="submit" className={styles.finalizar}>
           Pagar ahora
         </button>
         <hr />
         <Link to='/home'>
-        <button type="submit" className={styles.products}>
-          Products
-        </button>
+          <button type="button" className={styles.products}>
+            Products
+          </button>
         </Link>
       </form>
       <div className={styles.orden}>

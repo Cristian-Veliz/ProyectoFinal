@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import style from './NavBar.module.css';
-import LogoNav from '../../assets/LogoNav.jpg';
+import LogoNav from '../../assets/LogoDivano.jpg';
 
 
 import CardWidget from '../CardWidget/CardWidget';
