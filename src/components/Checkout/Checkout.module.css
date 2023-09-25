@@ -26,6 +26,9 @@
     margin-left: 40px;
     border-radius: 7px;
     padding: 10px;
+    background-color: rgb(100, 119, 245);
+    border: 1px solid #ccc;
+    color:beige;
   }
   
   .orden {
@@ -85,6 +88,15 @@
   margin: 0;
 }
 
-.button{
-  padding: auto;
+.finalizar:hover {
+  transform: scale(1.1);
+  background-color: rgb(100, 119, 245);
+  border: 1px solid #ccc;
+  color:beige;
+
+}
+.products{
+  text-decoration: none;
+  margin: 0 auto;
+
 }

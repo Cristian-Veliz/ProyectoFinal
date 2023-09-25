@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { CartContext } from "../Context/CartContext";
 import styles from "./Checkout.module.css";
 
@@ -40,7 +41,7 @@ const Checkout = () => {
         cantidad: producto.cantidad,
       })),
       total: cart.reduce(
-        (total, producto) => total + producto.item.precio * producto.cantidad,
+        (total, producto) => total + producto.item.price * producto.cantidad,
         0
       ),
       nombre,
@@ -170,10 +171,15 @@ const Checkout = () => {
 
         {error && <p style={{ color: "red" }}>{error}</p>}
         <button type="submit" className={styles.finalizar}>
-          Pagar Ahora
+          Pagar ahora
         </button>
+        <hr />
+        <Link to='/home'>
+        <button type="submit" className={styles.products}>
+          Products
+        </button>
+        </Link>
       </form>
-      <hr />
       <div className={styles.orden}>
         {ordenId && (
           <div className={styles.orderId}>

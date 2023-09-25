@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from '../Card/Card.module.css';
-//import { category } from '../../helpers/category';
 
 
 const Card = ({id, name, image, colors, price, Categories}) => {

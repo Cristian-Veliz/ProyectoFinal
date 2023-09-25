@@ -6,10 +6,9 @@ import { getAllFurnitures } from '../../components/redux/actions/Actions';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import OrderByName from '../../components/OrderByName/OrderByName';
 import FilterPrice from '../../components/FilterPrice/FilterPrice';
-import {categoryFilter}  from '../../helpers/categoryFilter';
+import { categoryFilter } from '../../helpers/categoryFilter';
 import FilterCategory from '../../components/FilterCategory/FilterCategory';
-
-
+import loading from '../../assets/loading.gif';
 
 function Home() {
   const dispatch = useDispatch();
@@ -38,14 +37,12 @@ function Home() {
     setFilteredCategory(selectedCategory);
   };
 
-// Aplicar el filtro de categoría
-const filteredFurnituresByCategory = filteredCategory === 'all'
-  ? filteredFurnitures
-  : filteredFurnitures.filter((furniture) => {
-      return furniture.Categories.some((category) => category.name === filteredCategory);
-    });
-
-
+  // Aplicar el filtro de categoría
+  const filteredFurnituresByCategory = filteredCategory === 'all'
+    ? filteredFurnitures
+    : filteredFurnitures.filter((furniture) => {
+        return furniture.Categories.some((category) => category.name === filteredCategory);
+      });
 
   console.log('filteredCategory:', filteredCategory);
   console.log('filteredFurnituresByCategory:', filteredFurnituresByCategory);
@@ -62,16 +59,28 @@ const filteredFurnituresByCategory = filteredCategory === 'all'
           <FilterPrice />
         </div>
       </div>
-      <CardContainer
-        allFurnitures={
-          filteredCategory === 'all'
-            ? filteredFurnitures
-            : filteredFurnituresByCategory
-        }
-      />
       <SearchBar setSearch={handleSearch} />
+      {allFurnitures.length === 0 ? (
+        <img className={style.loading} src={loading} alt="Loading..." />
+      ) : (
+        <>
+          {filteredFurnituresByCategory.length === 0 ? (
+            <p className={style.errorText}>❌ Furniture Not Found! ❌</p>
+          ) : (
+            <CardContainer
+              allFurnitures={
+                filteredCategory === 'all'
+                  ? filteredFurnitures
+                  : filteredFurnituresByCategory
+              }
+            />
+          )}
+        </>
+      )}
     </div>
   );
+
 }
 
 export default Home;
+
