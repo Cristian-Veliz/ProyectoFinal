@@ -66,3 +66,21 @@ export function next() {
     type: NEXT,
   };
 }
+
+
+
+export function crearOrden(orden) {
+  return async (dispatch)=>{
+    try {
+      //console.log("actions:::",orden);
+      const URL = "http://localhost:3001/order/create"
+      await axios.post(URL,orden)
+
+    } catch (error) {
+      console.error(
+        "No se puedo crear producto",
+        error.message
+      );
+    }
+  }
+}

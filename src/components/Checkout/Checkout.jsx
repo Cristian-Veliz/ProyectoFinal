@@ -2,6 +2,10 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { CartContext } from "../Context/CartContext";
 import styles from "./Checkout.module.css";
+import {crearOrden} from "../redux/actions/Actions"
+import { useDispatch } from "react-redux";
+import {loadStripe} from '@stripe/stripe-js'
+loadStripe()
 
 const Checkout = () => {
   const { cart, vaciarCarrito } = useContext(CartContext);
@@ -16,8 +20,10 @@ const Checkout = () => {
   const [errorEmail, setErrorEmail] = useState("");
   const [ordenId, setOrdenId] = useState("");
 
+  const dispatch = useDispatch();
+
   const manejadorFormulario = (event) => {
-    event.preventDefault();
+    event.preventDefault("pk_test_51Nuly0AVmtpsbHtkGwq84Pr5qvSyx6DNeQI2QOWYBtXCNXf1xtWqH2VHDTBmtbtPbtMTabvJvmnIGvUtN8DjCw7I00ylpAklez");
 
     if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
       setErrorNombre("Por favor complete todos los campos");
@@ -34,13 +40,27 @@ const Checkout = () => {
       setErrorNombre("El número de teléfono no puede ser negativo");
       return;
     }
+    function obtenerFechaActual() {
+      // Crear un nuevo objeto Date que represente la fecha actual
+      var fechaActual = new Date();
+    
+      // Obtener los componentes de la fecha
+      var año = fechaActual.getFullYear();
+      var mes = fechaActual.getMonth() + 1; // El mes comienza en 0, por lo que sumamos 1
+      var dia = fechaActual.getDate();
+    
+      // Formatear la fecha como una cadena "AAAA-MM-DD"
+      var fechaFormateada = `${año}-${mes < 10 ? '0' : ''}${mes}-${dia < 10 ? '0' : ''}${dia}`;
+    
+      // Devolver la fecha formateada
+      return fechaFormateada;
+    }
 
+    const ordenIdAleatorio = Math.floor(Math.random() * 10000) + 1;
+    setOrdenId(String(ordenIdAleatorio)); // Simulación de un ID de orden
+    
     const orden = {
-      items: cart.map((producto) => ({
-        id: producto.item.id,
-        nombre: producto.item.nombre,
-        cantidad: producto.cantidad,
-      })),
+      items: cart.map((producto) => producto.item.id),
       total: cart.reduce(
         (total, producto) => total + producto.item.price * producto.cantidad,
         0
@@ -51,15 +71,18 @@ const Checkout = () => {
       email,
       direccion,
       nota,
+      ordenId:ordenIdAleatorio,
+      orderDate:obtenerFechaActual()
     };
+    
+    dispatch(crearOrden(orden))
 
     // Almacenar la orden de compra en localStorage en formato JSON
     localStorage.setItem("ordenDeCompra", JSON.stringify(orden));
 
     setErrorNombre(""); // Borra el mensaje de error del nombre
     setErrorEmail(""); // Borra el mensaje de error del email
-    const ordenIdAleatorio = Math.floor(Math.random() * 10000) + 1;
-    setOrdenId(String(ordenIdAleatorio)); // Simulación de un ID de orden
+    
 
     // Vaciar el carrito después de guardar la orden
     vaciarCarrito();
@@ -72,6 +95,7 @@ const Checkout = () => {
     setEmailConfirmacion("");
     setDireccion("");
     setNota("");
+    //console.log(orden);
   };
 
   // Función para validar el campo de nombre en tiempo real
@@ -214,6 +238,7 @@ const Checkout = () => {
           </div>
         )}
       </div>
+
     </div>
   );
 };
