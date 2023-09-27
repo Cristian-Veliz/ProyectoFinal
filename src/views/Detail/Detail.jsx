@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllFurnitures } from '../../components/redux/actions/Actions';
 import { CartContext } from '../../components/Context/CartContext';
 
-const Detail = ({ actualizarCantidadTotal, cantidadTotal }) => {
+
+
+const Detail = ({ actualizarCantidadTotal, cantidadTotal, alert }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const allFurnitures = useSelector((state) => state.allFurnitures);
@@ -51,6 +53,9 @@ const Detail = ({ actualizarCantidadTotal, cantidadTotal }) => {
     addItem(furniture, contador);
     setProductoAgregado(true);
     setMostrarControles(false);
+
+     // Mostrar una alerta de éxito
+    alert.success(`Agregado al carrito: ${contador} ${name}`);
     console.log(`Agregado al carrito: ${contador} ${name}`);
 
     // Actualiza la cantidad total en el contexto directamente

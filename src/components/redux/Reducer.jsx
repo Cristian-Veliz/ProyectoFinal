@@ -3,8 +3,11 @@ import {
   GET_FURNITURES_BY_NAME,
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
+  SORT_BY_PRICE,
   PREV,
   NEXT,
+  GO_TO_FIRST_PAGE,
+  GO_TO_LAST_PAGE
 } from "./actions/ActionsTypes";
 
 const initialState = {
@@ -15,6 +18,7 @@ const initialState = {
   selectFurnitures: null,
   selectDbFurnitures: null,
   numPage: 1,
+  cantPage: 6,
   minPrice: "",
   maxPrice: "",
 };
@@ -65,6 +69,23 @@ export default function reducer(state = initialState, { type, payload }) {
         maxPrice, // Actualiza el estado del precio máximo
       };
 
+      case SORT_BY_PRICE:
+        const sortedFurnituresByPrice = [...state.allFurnitures];
+        sortedFurnituresByPrice.sort((a, b) => {
+          const priceA = parseFloat(a.price);
+          const priceB = parseFloat(b.price);
+          
+          if (payload === "ASC") {
+            return priceA - priceB;
+          } else if (payload === "DESC") {
+            return priceB - priceA;
+          }
+        });
+        return {
+          ...state,
+          allFurnitures: sortedFurnituresByPrice,
+        };
+      
     case PREV:
       return {
         ...state,
@@ -75,6 +96,19 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         numPage: state.numPage + 1,
       };
+
+      case GO_TO_FIRST_PAGE:
+        return {
+          ...state,
+          numPage: 1, // Cambia el número de página a 1 para ir a la primera página
+        };
+  
+      case GO_TO_LAST_PAGE:
+        return {
+          ...state,
+          numPage: state.cantPage, // Cambia el número de página a la última página
+        };
+  
 
     default:
       return { ...state };

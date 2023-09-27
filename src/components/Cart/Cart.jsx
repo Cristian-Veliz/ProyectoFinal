@@ -4,7 +4,8 @@ import { CartContext } from '../Context/CartContext';
 import { Link } from 'react-router-dom';
 import CartItem from '../CartItem/CartItem';
 
-const Cart = ({ actualizarCantidadTotal }) => { // Paso la función actualizarCantidadTotal como prop
+
+const Cart = ({ actualizarCantidadTotal }) => {
   const { cart, vaciarCarrito, total, cantidadTotal, eliminarProducto } = useContext(CartContext);
 
   if (cantidadTotal === 0) {
@@ -20,7 +21,7 @@ const Cart = ({ actualizarCantidadTotal }) => { // Paso la función actualizarCa
   const handleEliminarProducto = (id) => {
     eliminarProducto(id);
 
-    // Calcular la nueva cantidad total
+    // Recalcular la nueva cantidad total después de eliminar un producto
     let nuevaCantidadTotal = 0;
     cart.forEach((producto) => {
       nuevaCantidadTotal += producto.cantidad;
@@ -28,6 +29,7 @@ const Cart = ({ actualizarCantidadTotal }) => { // Paso la función actualizarCa
 
     // Actualizar la cantidad total
     actualizarCantidadTotal(nuevaCantidadTotal);
+
   };
 
   // Función para vaciar el carrito
@@ -64,3 +66,4 @@ const Cart = ({ actualizarCantidadTotal }) => { // Paso la función actualizarCa
 };
 
 export default Cart;
+

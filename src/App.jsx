@@ -13,7 +13,8 @@ import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
 import Form from './components/FormLogin/Form';
 import { CarritoProvider } from './components/Context/CartContext';
-
+import CheckoutForm from './components/BuyByStripe/BuyByStripe';
+import Swal from 'sweetalert2';
 
 
 function App() {
@@ -25,6 +26,16 @@ function App() {
   // Función para actualizar la cantidad total
   const actualizarCantidadTotal = (cantidad) => {
     setCantidadTotal(cantidad);
+  };
+
+  // Función alert para mostrar las alertas
+  const alert = {
+    success: (message) => {
+      Swal.fire({
+        icon: 'success',
+        text: message,
+      });
+    },
   };
 
   return (
@@ -47,6 +58,7 @@ function App() {
                 {...props}
                 actualizarCantidadTotal={actualizarCantidadTotal}
                 cantidadTotal={cantidadTotal}
+                alert={alert} 
               />
             )}
           />
@@ -55,6 +67,8 @@ function App() {
           <Route exact path='/about' component={About} />
           <Route exact path='/checkout' component={Checkout} /> 
           <Route exact path='/login' component={Form} />
+          <Route exact path='/buy' component={CheckoutForm} />
+
           <Route
             exact
             path='/cart'

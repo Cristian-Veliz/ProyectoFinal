@@ -5,10 +5,12 @@ import CardContainer from '../../components/CardContainer/CardContainer';
 import { getAllFurnitures } from '../../components/redux/actions/Actions';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import OrderByName from '../../components/OrderByName/OrderByName';
+import OrderByPrice from '../../components/OrderByPrice/OrderByPrice';
 import FilterPrice from '../../components/FilterPrice/FilterPrice';
 import { categoryFilter } from '../../helpers/categoryFilter';
 import FilterCategory from '../../components/FilterCategory/FilterCategory';
 import loading from '../../assets/loading.gif';
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -56,6 +58,7 @@ function Home() {
             allCategories={categoryFilter}
             onFilterChange={handleCategoryFilter}
           />
+          <OrderByPrice />
           <FilterPrice />
         </div>
       </div>

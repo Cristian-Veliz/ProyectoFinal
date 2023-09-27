@@ -4,8 +4,12 @@ import {
   GET_FURNITURES_BY_NAME,
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
+  SORT_BY_PRICE,
   PREV,
   NEXT,
+  GO_TO_FIRST_PAGE,
+  GO_TO_LAST_PAGE
+
 } from "./ActionsTypes";
 
 //ACTIONS CREATORS
@@ -56,6 +60,13 @@ export function filterByPrice(minPrice, maxPrice) {
   };
 }
 
+export const furnituresSortPrice = (order) => {
+  return {
+    type: SORT_BY_PRICE,
+    payload: order,
+  };
+};
+
 export function prev() {
   return {
     type: PREV,
@@ -66,3 +77,12 @@ export function next() {
     type: NEXT,
   };
 }
+
+// Actions.jsx
+export const goToFirstPage = () => ({
+  type: GO_TO_FIRST_PAGE,
+});
+
+export const goToLastPage = () => ({
+  type: GO_TO_LAST_PAGE,
+});

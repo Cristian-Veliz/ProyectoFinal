@@ -2,6 +2,11 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { CartContext } from "../Context/CartContext";
 import styles from "./Checkout.module.css";
+//import {Elements} from '@stripe/react-stripe-js';
+//import {loadStripe} from '@stripe/stripe-js';
+
+
+// const StripePromise = loadStripe(pk_test_51Nv1b0E7NpAu2QtkCPyu5g7LAMn5LtRe1xWFsSZYoOJ1GTH7BW79BfeuhUnkHUAisPMcmdk3VyLCUJZH3hTgLLfh00BTmlifL0);
 
 const Checkout = () => {
   const { cart, vaciarCarrito } = useContext(CartContext);
@@ -196,10 +201,11 @@ const Checkout = () => {
             onChange={(e) => setNota(e.target.value)}
           />
         </div>
-
-        <button type="submit" className={styles.finalizar}>
+         <Link to='/buy' style={{ textDecoration: 'none'}}>
+        <button type="submit" className={styles.pagar2} >
           Pagar ahora
         </button>
+         </Link>
         <hr />
         <Link to='/home'>
           <button type="button" className={styles.products}>
@@ -219,6 +225,5 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
 
 
