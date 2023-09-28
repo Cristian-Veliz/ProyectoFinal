@@ -243,7 +243,7 @@ const Checkout = () => {
             ¡Gracias por tu compra!✅ Tu número de Orden es: #{ordenId}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
