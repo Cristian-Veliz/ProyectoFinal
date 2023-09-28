@@ -73,7 +73,7 @@ const Checkout = () => {
       email,
       direccion,
       nota,
-      ordenId:ordenIdAleatorio,
+      // ordenId:ordenIdAleatorio,
       orderDate:obtenerFechaActual()
     };
     
