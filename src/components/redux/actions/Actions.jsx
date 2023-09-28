@@ -5,6 +5,7 @@ import {
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
   SORT_BY_PRICE,
+  LOGIN_SUCCESS,
   PREV,
   NEXT,
   GO_TO_FIRST_PAGE,
@@ -86,3 +87,30 @@ export const goToFirstPage = () => ({
 export const goToLastPage = () => ({
   type: GO_TO_LAST_PAGE,
 });
+
+
+export function crearOrden(orden) {
+  return async (dispatch)=>{
+    try {
+      console.log("actions:::",orden);
+      const URL = "http://localhost:3001/order/create"
+      await axios.post(URL,orden)
+
+    } catch (error) {
+      console.error(
+        "No se puedo crear producto",
+        error.message
+      );
+    }
+  }
+}
+export const loginSuccess = (form) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.post("http://localhost:3001/auth/login", form);
+      const { tokenSession } = response.data;
+      dispatch({ type: LOGIN_SUCCESS, payload: tokenSession });
+    } catch (error) {
+      console.error("Error de inicio de sesión:", error)}
+  };
+};

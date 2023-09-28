@@ -11,7 +11,7 @@ const NavBarLanding = () => {
       <nav className={style.navbar}>
         <div>
         <div className={style.logo}>
-          <Link to="/about">
+          <Link to="/">
             <img src={LogoNav} alt="logo" />
           </Link>
         </div>

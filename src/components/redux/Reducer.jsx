@@ -3,6 +3,7 @@ import {
   GET_FURNITURES_BY_NAME,
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
+  LOGIN_SUCCESS,
   SORT_BY_PRICE,
   PREV,
   NEXT,
@@ -21,6 +22,7 @@ const initialState = {
   cantPage: 6,
   minPrice: "",
   maxPrice: "",
+  token: null,
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -109,6 +111,12 @@ export default function reducer(state = initialState, { type, payload }) {
           numPage: state.cantPage, // Cambia el número de página a la última página
         };
   
+
+      case LOGIN_SUCCESS:
+        return {
+          ...state,
+          token: payload,
+        };
 
     default:
       return { ...state };
