@@ -1,12 +1,7 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom";
 import { CartContext } from "../Context/CartContext";
 import styles from "./Checkout.module.css";
-//import {Elements} from '@stripe/react-stripe-js';
-//import {loadStripe} from '@stripe/stripe-js';
-
-
-// const StripePromise = loadStripe(pk_test_51Nv1b0E7NpAu2QtkCPyu5g7LAMn5LtRe1xWFsSZYoOJ1GTH7BW79BfeuhUnkHUAisPMcmdk3VyLCUJZH3hTgLLfh00BTmlifL0);
 
 const Checkout = () => {
   const { cart, vaciarCarrito } = useContext(CartContext);
@@ -20,6 +15,8 @@ const Checkout = () => {
   const [errorNombre, setErrorNombre] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [ordenId, setOrdenId] = useState("");
+
+  const history = useHistory();
 
   const manejadorFormulario = (event) => {
     event.preventDefault();
@@ -68,6 +65,9 @@ const Checkout = () => {
 
     // Vaciar el carrito después de guardar la orden
     vaciarCarrito();
+
+    // Redirigir a la página de compra después de guardar la orden
+    history.push("/buy");
 
     // Limpiar los inputs
     setNombre("");
@@ -202,7 +202,7 @@ const Checkout = () => {
           />
         </div>
          <Link to='/buy' style={{ textDecoration: 'none'}}>
-        <button type="submit" className={styles.pagar2} >
+        <button type="submit" className={styles.pagar} >
           Pagar ahora
         </button>
          </Link>
@@ -213,13 +213,13 @@ const Checkout = () => {
           </button>
         </Link>
       </form>
-      <div className={styles.orden}>
+      {/* <div className={styles.orden}>
         {ordenId && (
           <div className={styles.orderId}>
             ¡Gracias por tu compra!✅ Tu número de Orden es: #{ordenId}
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

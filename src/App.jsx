@@ -13,7 +13,7 @@ import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
 import Form from './components/FormLogin/Form';
 import { CarritoProvider } from './components/Context/CartContext';
-import CheckoutForm from './components/BuyByStripe/BuyByStripe';
+import CheckoutForm from './components/Payment/CheckoutForm';
 import Swal from 'sweetalert2';
 
 

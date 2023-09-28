@@ -53,13 +53,13 @@ const Cart = ({ actualizarCantidadTotal }) => {
       <div className={style.medio}>
         <h3>Cantidad Total de Orden: {cantidadTotal} </h3>
         <h3 className={style.precio}>Total: U$S {total.toFixed(2)} </h3>
-        <button className={style.button} onClick={handleVaciarCarrito}>
-          Vaciar Carrito
+        <button className={style.finalizar2} onClick={handleVaciarCarrito}>
+          DELETE CART
         </button>
       </div>
       <hr />
       <div>
-        <Link to='/checkout' className={style.finalizar}>Finalizar compra</Link>
+        <Link to='/checkout' className={style.finalizar}>CONTINUE TO CKECKOUT</Link>
       </div>
     </div>
   );
