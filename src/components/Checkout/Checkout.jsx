@@ -4,8 +4,8 @@ import { CartContext } from "../Context/CartContext";
 import styles from "./Checkout.module.css";
 import {crearOrden} from "../redux/actions/Actions"
 import { useDispatch } from "react-redux";
-import {loadStripe} from '@stripe/stripe-js'
-loadStripe()
+// import {loadStripe} from '@stripe/stripe-js'
+// loadStripe("pk_test_51Nuly0AVmtpsbHtkGwq84Pr5qvSyx6DNeQI2QOWYBtXCNXf1xtWqH2VHDTBmtbtPbtMTabvJvmnIGvUtN8DjCw7I00ylpAklez")
 
 const Checkout = () => {
   const { cart, vaciarCarrito } = useContext(CartContext);
@@ -18,14 +18,14 @@ const Checkout = () => {
   const [nota, setNota] = useState("");
   const [errorNombre, setErrorNombre] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
-  // const [ordenId, setOrdenId] = useState("");
+  const [ordenId, setOrdenId] = useState("");
 
   const dispatch = useDispatch();
 
   const history = useHistory();
 
   const manejadorFormulario = (event) => {
-    event.preventDefault("pk_test_51Nuly0AVmtpsbHtkGwq84Pr5qvSyx6DNeQI2QOWYBtXCNXf1xtWqH2VHDTBmtbtPbtMTabvJvmnIGvUtN8DjCw7I00ylpAklez");
+    event.preventDefault();
 
     if (!nombre || !apellido || !telefono || !email || !emailConfirmacion) {
       setErrorNombre("Por favor complete todos los campos");
@@ -89,8 +89,7 @@ const Checkout = () => {
     // Vaciar el carrito después de guardar la orden
     vaciarCarrito();
 
-    // Redirigir a la página de compra después de guardar la orden
-    history.push("/buy");
+   
 
     // Limpiar los inputs
     setNombre("");
@@ -100,6 +99,8 @@ const Checkout = () => {
     setEmailConfirmacion("");
     setDireccion("");
     setNota("");
+     // Redirigir a la página de compra después de guardar la orden
+     history.push("/buy");
     //console.log(orden);
   };
 
@@ -225,11 +226,9 @@ const Checkout = () => {
             onChange={(e) => setNota(e.target.value)}
           />
         </div>
-         <Link to='/buy' style={{ textDecoration: 'none'}}>
         <button type="submit" className={styles.pagar} >
           Pagar ahora
         </button>
-         </Link>
         <hr />
         <Link to='/home'>
           <button type="button" className={styles.products}>
