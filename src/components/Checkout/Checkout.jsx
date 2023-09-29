@@ -18,7 +18,7 @@ const Checkout = () => {
   const [nota, setNota] = useState("");
   const [errorNombre, setErrorNombre] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
-  const [ordenId, setOrdenId] = useState("");
+  // const [ordenId, setOrdenId] = useState("");
 
   const dispatch = useDispatch();
 
@@ -58,8 +58,8 @@ const Checkout = () => {
       return fechaFormateada;
     }
 
-    const ordenIdAleatorio = Math.floor(Math.random() * 10000) + 1;
-    setOrdenId(String(ordenIdAleatorio)); // Simulación de un ID de orden
+    // const ordenIdAleatorio = Math.floor(Math.random() * 10000) + 1;
+    // setOrdenId(String(ordenIdAleatorio)); // Simulación de un ID de orden
     
     const orden = {
       items: cart.map((producto) => producto.item.id),
