@@ -1,6 +1,7 @@
 import React, {  useState } from 'react';
 import { useDispatch } from "react-redux";
 import {crearProduct} from '../redux/actions/Actions'
+import axios from 'axios';
 
 
 export const CreateProduct = (props) => {
@@ -8,7 +9,6 @@ export const CreateProduct = (props) => {
     const [productData, setProductData] = useState({
         name: "",
         colors: "",
-        image:"",
         width: "",
         height: "",
         deep: "",
@@ -19,7 +19,31 @@ export const CreateProduct = (props) => {
         category: ""
     });
 
- 
+    const [image, setImage] = useState("")
+    const [loading, setLoading] = useState(false);
+    
+
+const uplooadImage = async (e) => {
+  const files = e.target.files;
+  const data = new FormData();
+  data.append("file", files[0]);
+  data.append("upload_preset", "proyecto");
+  setLoading(true);
+
+  try {
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/dgbmueahi/upload",
+      data
+    );
+
+    setImage(response.data.secure_url);
+    console.log(response.data.secure_url);
+    setLoading(false);
+  } catch (error) {
+    console.error("Error al subir la imagen: ", error);
+    setLoading(false);
+  }
+};
 
 
 
@@ -38,7 +62,7 @@ export const CreateProduct = (props) => {
     const formattedData = {
     name: productData.name,
     colors: [productData.colors],
-    image:productData.image,
+    image:image,
     measures: {
       width: productData.width,
       height: productData.height,
@@ -68,7 +92,7 @@ export const CreateProduct = (props) => {
             <input type="text" value={productData.colors} name="colors" onChange={handleInputs} />
 
             <label htmlFor="image">imagen</label>
-            <input type="text" value={productData.image} name="image" onChange={handleInputs} />
+            <input type="file"  name="image" onChange={uplooadImage} />
 
             <label htmlFor="width">width</label>
             <input type="text" value={productData.width} name="width" onChange={handleInputs} />
@@ -102,135 +126,22 @@ export const CreateProduct = (props) => {
 
 
 
-
-
-
-
-/*
-    const handleOnchange=(e){
-      const newImage = e.target.files[0]
-      if(newImage){
-        setImage(URL.createObjectURL(newImage))
-      }
-      props.imageUpload(e)
-    }
-
-*/
-
-
-
-
-  //  const [image, setImage] = useState();
-   //  const inputFileRef = createRef()
-
-   //  const cleanup = () =>{
-   //    URL.revokeObjectURL(image && props.image)
-   //    inputFileRef.current.value= null;
-   //  }
-
-   //  const setImage = (newImage) =>{
-   //    if(image){
-   //      cleanup()
-   //    }
-   //    setImage(newImage)
-   //  }
-
-
-
-
-
-
-
-
-
-// const handleInputs = (e) => {
-//   const { name, value, files } = e.target;
-
-//   // Si el campo es un campo de archivo (input type="file"), actualiza el estado con el archivo seleccionado
-//   if (name === "image") {
-//     if (files && files.length > 0) {
-//       // Si hay un archivo seleccionado, guárdalo en el estado
-//       setProductData({
-//         ...productData,
-//         [name]: files[0],
-//       });
-//     } else {
-//       // Si no hay archivo seleccionado, resetea el campo de archivo en el estado (por ejemplo, a null)
-//       setProductData({
-//         ...productData,
-//         [name]: null,
-//       });
+// const uplooadImage = async (e) =>{
+//   const files = e.target.files;
+//   const data = new FormData();
+//   data.append("file",files[0]);
+//   data.append("upload_preset","proyecto");
+//   setLoading(true);
+//   const res = await fetch (
+//     "https://api.cloudinary.com/v1_1/dgbmueahi/upload",
+//     {
+//       method:"POST",
+//       body: data,
 //     }
-//   } else {
-//     // Si no es un campo de archivo, actualiza el estado como de costumbre
-//     setProductData({
-//       ...productData,
-//       [name]: value,
-//     });
-//   }
-// };
-
-
-
-
-
-// const formData = new FormData();
-// formData.append("name", productData.name);
-// formData.append("colors", productData.colors);
-// formData.append("image", productData.image);
-// formData.append("width", productData.width);
-// formData.append("height", productData.height);
-// formData.append("deep", productData.deep);
-// formData.append("description", productData.description);
-// formData.append("rate", productData.rate);
-// formData.append("count", productData.count);
-// formData.append("price", productData.price);
-// formData.append("category", productData.category);
-
-
-
-
-
-
-
-
-
-
-
-
-   // const objeto = {
-    //     name:productData.name,
-    //     colors:[productData.colors],
-    //     image:productData.image,
-    //     measures:{
-    //         width:productData.width,
-    //         height:productData.height,
-    //         deep:productData.deep,
-    //     },
-    //     description:productData.description,
-    //     rating:{
-    //         rate: Number(productData.rate),
-    //         count: Number(productData.count),
-    //     },
-    //     price: Number(productData.price),
-    //     category: [productData.category]
-    // }
-
-    // const handleInputs = (e) => {
-    //     const { name, value } = e.target;
-    //   setProductData({
-    //     ...productData,
-    //     [name]:value
-    //   })
-    // };
-
-
-
-
-
-
-
-
-
-
-
+//   )
+//   const file = await res.json();
+//   //console.log(res);
+//   setImage(file.secure_url)
+//   console.log(file.secure_url);
+//   setLoading(false)
+// }
