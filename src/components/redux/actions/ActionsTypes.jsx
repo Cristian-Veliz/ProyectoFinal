@@ -9,4 +9,5 @@ export const NEXT = 'NEXT';
 export const GO_TO_FIRST_PAGE = ' GO_TO_FIRST_PAGE';
 export const GO_TO_LAST_PAGE = 'GO_TO_LAST_PAGE';
 export const CREAR_ORDEN = 'CREAR_ORDEN';
+export const  CREATE_EMAIL='CREATE_EMAIL'
 

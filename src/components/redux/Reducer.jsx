@@ -10,6 +10,7 @@ import {
   GO_TO_FIRST_PAGE,
   GO_TO_LAST_PAGE,
   CREAR_ORDEN,
+  CREATE_EMAIL,
 } from "./actions/ActionsTypes";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   maxPrice: "",
   orders: [],
   token: null,
+  email: "",
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -123,6 +125,12 @@ export default function reducer(state = initialState, { type, payload }) {
       return {
         ...state,
         token: payload,
+      };
+
+    case CREATE_EMAIL:
+      return {
+        ...state,
+        email: payload,
       };
 
     default:

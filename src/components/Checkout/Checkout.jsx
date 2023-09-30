@@ -58,8 +58,8 @@ const Checkout = () => {
       return fechaFormateada;
     }
 
-    const ordenIdAleatorio = Math.floor(Math.random() * 10000) + 1;
-    setOrdenId(String(ordenIdAleatorio)); // Simulación de un ID de orden
+    // const ordenIdAleatorio = Math.floor(Math.random() * 10000) + 1;
+    // setOrdenId(String(ordenIdAleatorio)); // Simulación de un ID de orden
     
     const orden = {
       items: cart.map((producto) => producto.item.id),
@@ -236,18 +236,19 @@ const Checkout = () => {
           </button>
         </Link>
       </form>
-      { <div className={styles.orden}>
-      {ordenId && (
-  <div className={styles.orderId}>
-    ¡Gracias por tu compra! ✅ Tu número de Orden es: #{ordenId}
-  </div>
-)}
-
-      </div> }
+      {/* <div className={styles.orden}>
+        {ordenId && (
+          <div className={styles.orderId}>
+            ¡Gracias por tu compra!✅ Tu número de Orden es: #{ordenId}
+          </div>
+        )}
+      </div> */}
     </div>
   );
 };
 
 export default Checkout;
+
+
 
 

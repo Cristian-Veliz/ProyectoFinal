@@ -11,6 +11,7 @@ import {
   GO_TO_FIRST_PAGE,
   GO_TO_LAST_PAGE,
   CREAR_ORDEN,
+  CREATE_EMAIL,
 
 } from "./ActionsTypes";
 
@@ -115,4 +116,22 @@ export const loginSuccess = (form) => {
       console.error("Error de inicio de sesión:", error)}
   };
 };
+
+export function setState(email,estado){
+  return async (dispatch) =>{
+    try {
+      const URL = `http://localhost:3001/order/update?email=${email}&estado=${estado}`
+      await axios.put(URL)
+    } catch (error) {
+      console.log("no se pudo actualizar");
+    }
+  }
+}
+
+export function createEmail (email){
+  return {
+    type:CREATE_EMAIL,
+    payload:email
+  }
+}
 
