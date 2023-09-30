@@ -17,6 +17,7 @@ import CheckoutForm from './components/Payment/CheckoutForm';
 import Swal from 'sweetalert2';import Login from './views/Login/Login';
 import NewPassword from './components/NewPassword/NewPassword';
 import Register from './components/RegisterUser/Register';
+ import { CreateProduct } from './components/CreateProduct/createProduct';
 
 function App() {
   const { pathname } = useLocation();
@@ -80,6 +81,7 @@ function App() {
               />
               )}
           />
+          <Route exact path='/create' component={CreateProduct} /> 
         </Switch>
       </CarritoProvider>
     </div>

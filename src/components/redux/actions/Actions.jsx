@@ -9,7 +9,8 @@ import {
   PREV,
   NEXT,
   GO_TO_FIRST_PAGE,
-  GO_TO_LAST_PAGE
+  GO_TO_LAST_PAGE,
+  CREATE_EMAIL
 
 } from "./ActionsTypes";
 
@@ -92,18 +93,19 @@ export const goToLastPage = () => ({
 export function crearOrden(orden) {
   return async (dispatch)=>{
     try {
-      console.log("actions:::",orden);
-      const URL = "http://localhost:3001/order/create"
-      await axios.post(URL,orden)
+      //console.log("actions:::",orden);
+       const URL = "http://localhost:3001/order/create"
+       await axios.post(URL,orden)
 
     } catch (error) {
       console.error(
-        "No se puedo crear producto",
+        "No se puedo crear orden",
         error.message
       );
     }
   }
 }
+
 export const loginSuccess = (form) => {
   return async function (dispatch) {
     try {
@@ -114,3 +116,39 @@ export const loginSuccess = (form) => {
       console.error("Error de inicio de sesión:", error)}
   };
 };
+
+
+export function crearProduct(product) {
+  return async (dispatch)=>{
+    try {
+      // console.log("actions:::",product);
+        const URL = "http://localhost:3001/product/create"
+        await axios.post(URL,product)
+
+    } catch (error) {
+      console.error(
+        "No se puedo crear producto",
+        error.message
+      );
+    }
+  }
+}
+
+
+export function setState(email,estado){
+  return async (dispatch) =>{
+    try {
+      const URL = `http://localhost:3001/order/update?email=${email}&estado=${estado}`
+      await axios.put(URL)
+    } catch (error) {
+      console.log("no se pudo actualizar");
+    }
+  }
+}
+
+export function createEmail (email){
+  return {
+    type:CREATE_EMAIL,
+    payload:email
+  }
+}

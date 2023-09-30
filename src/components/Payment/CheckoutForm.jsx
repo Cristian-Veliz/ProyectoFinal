@@ -4,18 +4,25 @@ import { loadStripe } from "@stripe/stripe-js";
 import Swal from 'sweetalert2';
 import { useHistory } from "react-router-dom"; 
 import styles from "./CheckoutForm.module.css"; 
+import MyOrders from "../../views/MyOrders/MyOrders"
+import { useDispatch } from "react-redux";
 //require('dotenv').config();
 //const{CLAVE_PUBLICA_STRIPE}=process.env;
+
+import {setState,createEmail} from '../redux/actions/Actions'
 
 const stripePromise = loadStripe('pk_test_51Nv1b0E7NpAu2QtkCPyu5g7LAMn5LtRe1xWFsSZYoOJ1GTH7BW79BfeuhUnkHUAisPMcmdk3VyLCUJZH3hTgLLfh00BTmlifL0');
 
 const BuyCheckoutForm = () => {
+  const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
   const history = useHistory(); 
 
+  const [estado,setEstado] = useState("") 
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [isPaymentDisabled, setIsPaymentDisabled] = useState(true); // Inicialmente deshabilitado
 
   const handleNameChange = (e) => {
@@ -28,11 +35,19 @@ const BuyCheckoutForm = () => {
     updatePaymentButtonStatus(name, e.target.value);
   };
 
-  const updatePaymentButtonStatus = (inputName, inputLastName) => {
-    // Habilitar el botón de pago solo si se completa el nombre y el apellido
-    setIsPaymentDisabled(!(inputName && inputLastName));
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    updatePaymentButtonStatus(name, e.target.value);
   };
 
+  const updatePaymentButtonStatus = (inputName, inputLastName) => {
+    // Habilitar el botón de pago solo si se completa el nombre y el apellido
+    setIsPaymentDisabled(!(inputName && inputLastName ));
+  };
+
+
+
+  /* */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,6 +78,8 @@ const BuyCheckoutForm = () => {
         text: '¡Tu pago se ha procesado con éxito!',
         
       });
+      dispatch(createEmail(email))
+      dispatch(setState(email,estado))
 
       // Agregar un retraso antes de redirigir 
       setTimeout(() => {
@@ -73,9 +90,17 @@ const BuyCheckoutForm = () => {
     }
   };
 
+  /**** */ 
+
+
+  const setear = () =>{
+    setEstado("completado")
+  }
+
   const handleClearFields = () => {
     setName("");
     setLastName("");
+    setEmail("")
     elements.getElement(CardElement).clear(); // Limpiar los campos de la tarjeta
     setIsPaymentDisabled(true); // Deshabilitar el botón de pago
   };
@@ -95,15 +120,22 @@ const BuyCheckoutForm = () => {
           value={lastName}
           onChange={handleLastNameChange}
         />
+         <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
       </div>
       <div className={styles["card-element"]}>
         <CardElement />
       </div>
       <div className={styles["button-container"]}>
-        <button type="submit" className={styles["pay-button"]} disabled={isPaymentDisabled}>Pagar</button>
+        <button type="submit" onClick={setear} className={styles["pay-button"]} disabled={isPaymentDisabled}>Pagar</button>
         <button type="button" onClick={handleClearFields} className={styles["clear-button"]}>Limpiar Campos</button>
       </div>
     </form>
+    
   );
 };
 
