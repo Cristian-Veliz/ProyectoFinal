@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import './MyOrders.module.css';
+import style from './MyOrders.module.css'; // Importa el CSS Module
 import { useSelector } from "react-redux";
 import axios from "axios";
 
 function MyOrders() {
   const email = useSelector((state) => state.email);
-  const [latestOrder, setLatestOrder] = useState(null); // Almacena solo la última orden
+  const [latestOrder, setLatestOrder] = useState(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/order/get/${email}`);
-        const latestOrder = response.data[response.data.length - 1]; // Obtén la última orden del array
-        setLatestOrder(latestOrder); // Almacena la última orden en el estado
+        const latestOrder = response.data[response.data.length - 1];
+        setLatestOrder(latestOrder);
       } catch (error) {
         console.error('Error al obtener las órdenes:', error);
       }
@@ -23,18 +23,24 @@ function MyOrders() {
 
   return (
     <div>
-      <h1>Mi Última Orden:</h1>
+      <h1 className={style.title}>📦 Tus órdenes son las siguientes 📦:</h1>
       {latestOrder ? (
-        <div key={latestOrder.ordenId}>
-          <p>Orden ID: {latestOrder.ordenId}</p>
-          <p>Nombre: {latestOrder.nombre}</p>
-          <p>Total: {latestOrder.total}</p>
+        <div key={latestOrder.ordenId} className={style.finalizar}>
+          <br />
+          <p className={style.orderId}>Orden ID: {latestOrder.ordenId}</p>
+          <p className={style.orderId}>Fecha de Orden: {latestOrder.orderDate}</p>
+          <p className={style.name}>Nombre de Titular: {`${latestOrder.nombre} ${latestOrder.apellido}`}</p>
+          <p className={style.total}>Monto Total: U$S {latestOrder.total}</p>
+          <p className={style.total}>Estatus de Orden: {latestOrder.status}</p>
+
           {latestOrder.Products.map((product) => (
-            <div key={product.id}>
-              <p>Nombre del Producto: {product.name}</p>
-              <p>Categoría: {product.category}</p>
+            <div key={product.id} className={style.product}>
+              <p>Nombre de Producto: {product.name}</p>
+              <p>Categoría de Producto: {product.category}</p>
             </div>
+            
           ))}
+          <br />
         </div>
       ) : (
         <p>Cargando órden...</p>
@@ -44,14 +50,6 @@ function MyOrders() {
 }
 
 export default MyOrders;
-
-
-
-
-
-
-
-
 
 
 

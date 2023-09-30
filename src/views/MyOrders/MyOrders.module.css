@@ -1,0 +1,35 @@
+/* MyOrders.module.css */
+
+.finalizar {
+    background-color: beige; 
+    border:0.1px solid rgb(201, 201, 157);
+    padding: 20px; /* Espaciado interno */
+    margin-bottom: 20px; /* Margen inferior */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  h1 {
+    font-size: 20px; 
+    margin-bottom: 10px; 
+    height: min-content;
+   
+    background-color: #6f4e4ede;
+  
+    
+  }
+  
+  .finalizar p {
+    margin: 10px 0; 
+    font-family: Arial, sans-serif; /* Utiliza Arial como primera opción y sans-serif como alternativa en caso de que Arial no esté disponible */
+  }
+  
+  .finalizar .product {
+    border-top: 1px solid #ccc; /* Línea divisoria entre productos */
+    padding-top: 10px; /* Espaciado superior para productos */
+  }
+  
+  /* Estilo para alinear a la derecha y letra negrita en <p> */
+p {
+  text-align: right; /* Alinea el texto a la derecha */
+  font-weight: bold; /* Aplica un estilo de letra negrita */
+}

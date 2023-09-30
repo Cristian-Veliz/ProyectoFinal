@@ -76,21 +76,28 @@ const BuyCheckoutForm = () => {
         icon: 'success',
         title: 'Pago exitoso',
         text: '¡Tu pago se ha procesado con éxito!',
+        text: 'Redirigiendo a Mis Ordenes...',
+        timer: 3000,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        didClose: () => {
+          history.push('/orders')
+        }
         
       });
       dispatch(createEmail(email))
       dispatch(setState(email,estado))
-
+      console.log('Pago exitoso'); 
       // Agregar un retraso antes de redirigir 
-      setTimeout(() => {
-        console.log('Pago exitoso'); 
+      // setTimeout(() => {
+      //   console.log('Pago exitoso'); 
         
-        history.push('/orders'); // Redirige al usuario a la página de órdenes
-      }, 3000); // Retraso de 3 segundos 
+      //   history.push('/orders'); // Redirige al usuario a la página de órdenes
+      // }, 3000); // Retraso de 3 segundos 
     }
   };
 
-  /**** */ 
+
 
 
   const setear = () =>{
@@ -132,7 +139,7 @@ const BuyCheckoutForm = () => {
       </div>
       <div className={styles["button-container"]}>
         <button type="submit" onClick={setear} className={styles["pay-button"]} disabled={isPaymentDisabled}>Pagar</button>
-        <button type="button" onClick={handleClearFields} className={styles["clear-button"]}>Limpiar Campos</button>
+        <button type="button" onClick={handleClearFields} className={styles["clear-button"]}>Limpiar</button>
       </div>
     </form>
     
