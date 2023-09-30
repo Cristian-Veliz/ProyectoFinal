@@ -10,7 +10,8 @@ import {
   NEXT,
   GO_TO_FIRST_PAGE,
   GO_TO_LAST_PAGE,
-  CREATE_EMAIL
+  CREAR_ORDEN,
+  CREATE_EMAIL,
 
 } from "./ActionsTypes";
 
@@ -91,19 +92,20 @@ export const goToLastPage = () => ({
 
 
 export function crearOrden(orden) {
-  return async (dispatch)=>{
+  return async (dispatch) => {
     try {
       //console.log("actions:::",orden);
        const URL = "http://localhost:3001/order/create"
        await axios.post(URL,orden)
 
+      dispatch({ type: CREAR_ORDEN, payload: orden });
     } catch (error) {
       console.error(
         "No se puedo crear orden",
         error.message
       );
     }
-  }
+  };
 }
 
 export const loginSuccess = (form) => {
