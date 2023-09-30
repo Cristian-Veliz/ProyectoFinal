@@ -8,7 +8,8 @@ import {
   PREV,
   NEXT,
   GO_TO_FIRST_PAGE,
-  GO_TO_LAST_PAGE
+  GO_TO_LAST_PAGE,
+  CREAR_ORDEN,
 } from "./actions/ActionsTypes";
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   cantPage: 6,
   minPrice: "",
   maxPrice: "",
+  orders: [],
   token: null,
 };
 
@@ -55,7 +57,7 @@ export default function reducer(state = initialState, { type, payload }) {
         allFurnitures: sortedFurnituresByName,
       };
 
-    case FILTER_BY_PRICE: 
+    case FILTER_BY_PRICE:
       const { minPrice, maxPrice } = payload;
       const filteredFurnituresByPrice = state.temporal.filter((furniture) => {
         const price = parseFloat(furniture.price);
@@ -71,23 +73,29 @@ export default function reducer(state = initialState, { type, payload }) {
         maxPrice, // Actualiza el estado del precio máximo
       };
 
-      case SORT_BY_PRICE:
-        const sortedFurnituresByPrice = [...state.allFurnitures];
-        sortedFurnituresByPrice.sort((a, b) => {
-          const priceA = parseFloat(a.price);
-          const priceB = parseFloat(b.price);
-          
-          if (payload === "ASC") {
-            return priceA - priceB;
-          } else if (payload === "DESC") {
-            return priceB - priceA;
-          }
-        });
-        return {
-          ...state,
-          allFurnitures: sortedFurnituresByPrice,
-        };
-      
+    case SORT_BY_PRICE:
+      const sortedFurnituresByPrice = [...state.allFurnitures];
+      sortedFurnituresByPrice.sort((a, b) => {
+        const priceA = parseFloat(a.price);
+        const priceB = parseFloat(b.price);
+
+        if (payload === "ASC") {
+          return priceA - priceB;
+        } else if (payload === "DESC") {
+          return priceB - priceA;
+        }
+      });
+      return {
+        ...state,
+        allFurnitures: sortedFurnituresByPrice,
+      };
+
+    case CREAR_ORDEN:
+      return {
+        ...state,
+        orders: [...state.orders, action.payload],
+      };
+
     case PREV:
       return {
         ...state,
@@ -99,24 +107,23 @@ export default function reducer(state = initialState, { type, payload }) {
         numPage: state.numPage + 1,
       };
 
-      case GO_TO_FIRST_PAGE:
-        return {
-          ...state,
-          numPage: 1, // Cambia el número de página a 1 para ir a la primera página
-        };
-  
-      case GO_TO_LAST_PAGE:
-        return {
-          ...state,
-          numPage: state.cantPage, // Cambia el número de página a la última página
-        };
-  
+    case GO_TO_FIRST_PAGE:
+      return {
+        ...state,
+        numPage: 1, // Cambia el número de página a 1 para ir a la primera página
+      };
 
-      case LOGIN_SUCCESS:
-        return {
-          ...state,
-          token: payload,
-        };
+    case GO_TO_LAST_PAGE:
+      return {
+        ...state,
+        numPage: state.cantPage, // Cambia el número de página a la última página
+      };
+
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        token: payload,
+      };
 
     default:
       return { ...state };
