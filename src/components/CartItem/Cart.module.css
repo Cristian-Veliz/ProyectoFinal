@@ -1,10 +1,40 @@
-.eliminar{
-    display:flex;
-    align-items:center;
-    flex-direction:row;
-    justify-content: space-between;
+/* Agrega este CSS a tu archivo CSS existente */
+.centered-text {
+    text-align: left; /* Alinea el texto a la izquierda */
+    display: inline-block;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100vh; /* Ajusta la altura al 100% del viewport */
+  }
+  
+  .delete {
+    display: inline-block;
+    align-items: center;
+    width: 30px;
+    justify-content: center;
     margin: 10px;
-    border-radius: 7px;
+    margin-left: 30px;
     padding: 2px;
-    line-height: 0.5;
-}
+    height: 20px;
+    background-color: azure;
+    cursor: pointer;
+    border: none; /* Elimina el borde */
+    border-radius: 50%; /* Da forma circular al botón */
+  }
+  
+  .delete:hover {
+    transform: scale(1.15);
+    background-color: red;
+  }
+  
+  .alineado {
+    display: inline-flex;
+    justify-content: center;
+  }
+  
+  .alineado p {
+    text-align: left;
+    margin-left: 30px;
+  }
+  

@@ -1,11 +1,11 @@
 import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext(
-//   {
-//   cart: [],
-//   total: 0,
-//   cantidadTotal: 0,
-// }
+  {
+  cart: [],
+  total: 0,
+  cantidadTotal: 0,
+}
 );
 
 export const CarritoProvider = ({ children }) => {
