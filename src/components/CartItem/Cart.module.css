@@ -1,11 +1,11 @@
-/* Agrega este CSS a tu archivo CSS existente */
+
 .centered-text {
-    text-align: left; /* Alinea el texto a la izquierda */
+    text-align: left;
     display: inline-block;
     flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-    height: 100vh; /* Ajusta la altura al 100% del viewport */
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
   }
   
   .delete {
@@ -19,8 +19,8 @@
     height: 20px;
     background-color: azure;
     cursor: pointer;
-    border: none; /* Elimina el borde */
-    border-radius: 50%; /* Da forma circular al botón */
+    border: none; 
+    border-radius: 50%; 
   }
   
   .delete:hover {

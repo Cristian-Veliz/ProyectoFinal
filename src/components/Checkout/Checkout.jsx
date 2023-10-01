@@ -143,7 +143,7 @@ const Checkout = () => {
             <p>
               {producto.item.name}: {producto.cantidad} unidades
             </p>
-            <p style={{ color: "red" }}>Precio Final: U$S {producto.item.price}</p>
+            <p style={{ color: "red" }}>Precio Final: U$S {producto.item.price * producto.cantidad}</p>
           </div>
         ))}
         <hr />
