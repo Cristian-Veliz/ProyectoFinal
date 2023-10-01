@@ -15,7 +15,7 @@
     height: 30px;
     text-align: center;
     line-height: 0%;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 a{
@@ -30,20 +30,34 @@ a:hover{
 }
 .finalizar{
     border: 1px solid black;
-    height: 15px;
+    height: 20px;
     text-decoration: none;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 8px;
     display: inline-flex;
     justify-content: center;   
     background-color:#333;
     color: azure;
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
-    line-height: 1;
+    line-height: 1.5;
+    border-radius: 10px;
    
 }
 
+.finalizar2 {
+    border: 1px solid black;
+    height: 25 px;
+    text-decoration: none;
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;   
+    background-color:#333;
+    color: azure;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.2;
+   
+}
 .finalizar button{
     height: 15px;
 }
@@ -61,7 +75,7 @@ a:hover{
 .precio {
     background-color: yellow;
     border-radius: 10px;
-    margin-left: -170px;
+    margin-left: -220px;
     text-align: center;
     height: 35px;
     

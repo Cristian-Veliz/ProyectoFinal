@@ -4,7 +4,6 @@ import { CartContext } from "../Context/CartContext";
 import styles from "./Checkout.module.css";
 import {crearOrden} from "../redux/actions/Actions"
 import { useDispatch } from "react-redux";
-import Swal from 'sweetalert2';
 // import {loadStripe} from '@stripe/stripe-js'
 // loadStripe("pk_test_51Nuly0AVmtpsbHtkGwq84Pr5qvSyx6DNeQI2QOWYBtXCNXf1xtWqH2VHDTBmtbtPbtMTabvJvmnIGvUtN8DjCw7I00ylpAklez")
 
@@ -100,19 +99,9 @@ const Checkout = () => {
     setEmailConfirmacion("");
     setDireccion("");
     setNota("");
-
-    Swal.fire({
-      icon: 'success',
-      title: 'Checkout Exitoso',
-      html: 'Orden pendiente de pago 🕒<br>Se redirige a procesador de pago',
-      timer: 3000, // Tiempo en milisegundos (3 segundos)
-      showConfirmButton: false,
-      timerProgressBar: true,
-      didClose: () => {
-        // Redirigir automáticamente a '/pay' después del tiempo especificado
-        history.push('/buy');
-      },
-    });
+     // Redirigir a la página de compra después de guardar la orden
+     history.push("/buy");
+    //console.log(orden);
   };
 
   // Función para validar el campo de nombre en tiempo real
@@ -143,7 +132,7 @@ const Checkout = () => {
             <p>
               {producto.item.name}: {producto.cantidad} unidades
             </p>
-            <p style={{ color: "red" }}>Precio Final: U$S {producto.item.price * producto.cantidad}</p>
+            <p style={{ color: "red" }}>Precio Final: U$S {producto.item.price}</p>
           </div>
         ))}
         <hr />
@@ -259,11 +248,4 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
-
-
-
-
-
-
 

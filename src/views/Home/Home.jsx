@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import style from './Home.module.css';
+import removeAccents from 'remove-accents';
 import { useDispatch, useSelector } from 'react-redux';
 import CardContainer from '../../components/CardContainer/CardContainer';
 import { getAllFurnitures } from '../../components/redux/actions/Actions';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import OrderByName from '../../components/OrderByName/OrderByName';
+import OrderByPrice from '../../components/OrderByPrice/OrderByPrice';
 import FilterPrice from '../../components/FilterPrice/FilterPrice';
 import { categoryFilter } from '../../helpers/categoryFilter';
 import FilterCategory from '../../components/FilterCategory/FilterCategory';
@@ -23,12 +25,13 @@ function Home() {
   const [filteredCategory, setFilteredCategory] = useState('all'); // Estado para rastrear la categoría filtrada
 
   const handleSearch = (furniture) => {
-    setSearchFurniture(furniture.toLowerCase());
+    const normalizedSearch = removeAccents(furniture).toLowerCase();
+    setSearchFurniture(normalizedSearch);
   };
 
   // Filtrar los muebles que coincidan con la búsqueda
   const filteredFurnitures = allFurnitures.filter((furniture) =>
-    furniture.name.toLowerCase().includes(searchFurniture)
+    removeAccents(furniture.name).toLowerCase().includes(searchFurniture)
   );
 
   // Función para manejar el filtro de categoría
@@ -56,6 +59,7 @@ function Home() {
             allCategories={categoryFilter}
             onFilterChange={handleCategoryFilter}
           />
+          <OrderByPrice />
           <FilterPrice />
         </div>
       </div>
@@ -79,8 +83,8 @@ function Home() {
       )}
     </div>
   );
-
 }
 
 export default Home;
+
 

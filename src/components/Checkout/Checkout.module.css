@@ -29,6 +29,7 @@
     background-color:#0056b3;
     border: 1px solid #333;
     color:whitesmoke;
+    text-decoration: none;
   }
   
   .orden {
@@ -88,15 +89,27 @@
   margin: 0;
 }
 
-.finalizar:hover {
-  transform: scale(1.1);
-  background-color: #0056b3;
-  border: 1px solid #ccc;
- 
 
-}
 .products{
   text-decoration: none;
   margin: 0 auto;
+
+}
+
+.pagar2{
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  border-radius: 7px;
+  padding: 10px;
+  background-color:#0056b3;
+  border: 1px solid #333;
+  color:whitesmoke;
+
+
+}
+
+.pagar2 button{
+  text-decoration: none;
 
 }

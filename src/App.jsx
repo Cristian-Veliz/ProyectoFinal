@@ -11,9 +11,10 @@ import About from './views/About/About';
 import CardWidget from './components/CardWidget/CardWidget';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
-// import Form from './components/FormLogin/Form';
+import Form from './components/FormLogin/Form';
 import { CarritoProvider } from './components/Context/CartContext';
-import Login from './views/Login/Login';
+import CheckoutForm from './components/Payment/CheckoutForm';
+import Swal from 'sweetalert2';import Login from './views/Login/Login';
 import NewPassword from './components/NewPassword/NewPassword';
 import Register from './components/RegisterUser/Register';
 import LoginGetUser from './views/Login/LoginGetUser';
@@ -27,6 +28,16 @@ function App() {
   // Función para actualizar la cantidad total
   const actualizarCantidadTotal = (cantidad) => {
     setCantidadTotal(cantidad);
+  };
+
+  // Función alert para mostrar las alertas
+  const alert = {
+    success: (message) => {
+      Swal.fire({
+        icon: 'success',
+        text: message,
+      });
+    },
   };
 
   return (
@@ -50,6 +61,7 @@ function App() {
                 {...props}
                 actualizarCantidadTotal={actualizarCantidadTotal}
                 cantidadTotal={cantidadTotal}
+                alert={alert} 
               />
             )}
           />
@@ -57,9 +69,10 @@ function App() {
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
           <Route exact path='/checkout' component={Checkout} /> 
-          <Route exact path='/login' component={Login} /> 
-          <Route exact path='/newPassword' component={NewPassword} /> 
-          <Route exact path='/register' component={Register} /> 
+          <Route exact path='/login' component={Form} />
+          <Route exact path='/buy' component={CheckoutForm} />
+          <Route exact path='/register' component={Register} />
+
           <Route
             exact
             path='/cart'

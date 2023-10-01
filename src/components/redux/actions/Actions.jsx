@@ -4,11 +4,17 @@ import {
   GET_FURNITURES_BY_NAME,
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
+  SORT_BY_PRICE,
   LOGIN_SUCCESS,
   LOGIN_GET_USER,
   LOGOUT,
   PREV,
   NEXT,
+  GO_TO_FIRST_PAGE,
+  GO_TO_LAST_PAGE,
+  CREAR_ORDEN,
+  CREATE_EMAIL,
+
 } from "./ActionsTypes";
 
 //ACTIONS CREATORS
@@ -58,6 +64,13 @@ export function filterByPrice(minPrice, maxPrice) {
   };
 }
 
+export const furnituresSortPrice = (order) => {
+  return {
+    type: SORT_BY_PRICE,
+    payload: order,
+  };
+};
+
 export function prev() {
   return {
     type: PREV,
@@ -69,17 +82,31 @@ export function next() {
   };
 }
 
+// Actions.jsx
+export const goToFirstPage = () => ({
+  type: GO_TO_FIRST_PAGE,
+});
+
+export const goToLastPage = () => ({
+  type: GO_TO_LAST_PAGE,
+});
+
+
 export function crearOrden(orden) {
   return async (dispatch) => {
     try {
       console.log("actions:::", orden);
       const URL = "http://localhost:3001/order/create";
       await axios.post(URL, orden);
+
+      dispatch({ type: CREAR_ORDEN, payload: orden });
     } catch (error) {
-      console.error("No se puedo crear producto", error.message);
+      console.error("No se pudo crear el producto", error.message);
     }
   };
 }
+
+
 export const loginSuccess = (form) => {
   return async function (dispatch) {
     try {
@@ -117,3 +144,22 @@ export const logout = () => {
     type: LOGOUT,
   };
 };
+
+export function setState(email,estado){
+  return async (dispatch) =>{
+    try {
+      const URL = `http://localhost:3001/order/update?email=${email}&estado=${estado}`
+      await axios.put(URL)
+    } catch (error) {
+      console.log("no se pudo actualizar");
+    }
+  }
+}
+
+export function createEmail (email){
+  return {
+    type:CREATE_EMAIL,
+    payload:email
+  }
+}
+
