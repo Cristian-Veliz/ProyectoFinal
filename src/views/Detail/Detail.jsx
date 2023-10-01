@@ -80,7 +80,6 @@ const Detail = ({ actualizarCantidadTotal, cantidadTotal, alert }) => {
         <h3>Colors: {colorString}</h3>
         <h3>Description: {description}</h3>
         <h3>Price: {`${price} usd`}</h3>
-
         <div>
           {mostrarControles && (
             <>

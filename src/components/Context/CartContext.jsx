@@ -1,20 +1,23 @@
 import React, { createContext, useState, useEffect } from "react";
 
-export const CartContext = createContext(
-  {
+export const CartContext = createContext({
   cart: [],
   total: 0,
   cantidadTotal: 0,
-}
-);
+  addItem: () => {},
+  eliminarProducto: () => {},
+  vaciarCarrito: () => {},
+  actualizarCantidadProducto: () => {},
+  recoveryOpen: false,
+  openRecovery: () => {},
+  closeRecovery: () => {},
+});
 
 export const CarritoProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [cantidadTotal, setCantidadTotal] = useState(0);
   const [recoveryOpen, setRecoveryOpen] = useState(false);
-    const openRecovery = ()=>setRecoveryOpen(true);
-    const closeRecovery = ()=>setRecoveryOpen(false);
 
   // Cargar el carrito desde localStorage al iniciar la aplicación
   useEffect(() => {
@@ -22,10 +25,19 @@ export const CarritoProvider = ({ children }) => {
     if (carritoGuardado) {
       const carritoParseado = JSON.parse(carritoGuardado);
       setCart(carritoParseado.cart);
-      setTotal(carritoParseado.total);
+      calcularTotal(carritoParseado.cart);
       setCantidadTotal(carritoParseado.cantidadTotal);
     }
   }, []);
+
+  // Función para calcular el total
+  const calcularTotal = (carrito) => {
+    let nuevoTotal = 0;
+    carrito.forEach((producto) => {
+      nuevoTotal += producto.item.price * producto.cantidad;
+    });
+    setTotal(nuevoTotal);
+  };
 
   // Función para guardar el carrito en localStorage
   const guardarCarritoEnLocalStorage = (carrito, nuevoTotal, nuevaCantidadTotal) => {
@@ -116,21 +128,50 @@ export const CarritoProvider = ({ children }) => {
     // Limpiar localStorage cuando se vacía el carrito
     localStorage.removeItem("carrito");
 
-    console.log("Carrito vacio y localStorage limpio");
+    console.log("Carrito vacío y localStorage limpio");
+  };
+
+  const actualizarCantidadProducto = (id, nuevaCantidad) => {
+    const carritoActualizado = [...cart];
+    const productoIndex = carritoActualizado.findIndex((prod) => prod.item.id === id);
+
+    if (productoIndex !== -1) {
+      const producto = carritoActualizado[productoIndex];
+      const diferenciaCantidad = nuevaCantidad - producto.cantidad;
+      const nuevoTotal = total + diferenciaCantidad * producto.item.price;
+      const nuevaCantidadTotal = cantidadTotal + diferenciaCantidad;
+
+      carritoActualizado[productoIndex].cantidad = nuevaCantidad;
+      setCart(carritoActualizado);
+      setTotal(nuevoTotal);
+      setCantidadTotal(nuevaCantidadTotal);
+
+      // Guardar en localStorage cada vez que se actualiza la cantidad de un producto
+      guardarCarritoEnLocalStorage(carritoActualizado, nuevoTotal, nuevaCantidadTotal);
+    }
+  };
+
+  const openRecovery = () => {
+    setRecoveryOpen(true);
+  };
+
+  const closeRecovery = () => {
+    setRecoveryOpen(false);
   };
 
   return (
     <CartContext.Provider
       value={{
         cart,
+        total,
+        cantidadTotal,
         addItem,
         eliminarProducto,
         vaciarCarrito,
-        total,
-        cantidadTotal,
+        actualizarCantidadProducto,
         recoveryOpen,
         openRecovery,
-        closeRecovery
+        closeRecovery,
       }}
     >
       {children}

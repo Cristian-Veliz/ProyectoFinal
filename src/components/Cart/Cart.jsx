@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
-import style from './Cart.module.css';
-import { CartContext } from '../Context/CartContext';
-import { Link } from 'react-router-dom';
-import CartItem from '../CartItem/CartItem';
+import React, { useContext } from "react";
+import style from "./Cart.module.css";
+import { CartContext } from "../Context/CartContext";
+import { Link } from "react-router-dom";
+import CartItem from "../CartItem/CartItem";
 
-
-const Cart = ({ actualizarCantidadTotal }) => {
+const Cart = () => {
   const { cart, vaciarCarrito, total, cantidadTotal, eliminarProducto } = useContext(CartContext);
 
   if (cantidadTotal === 0) {
     return (
       <>
         <h2>No hay Productos en el Carrito</h2>
-        <Link to='/home' className={style.finalizar}>Productos</Link>
+        <Link to="/home" className={style.finalizar}>
+          Productos
+        </Link>
       </>
     );
   }
@@ -20,23 +21,11 @@ const Cart = ({ actualizarCantidadTotal }) => {
   // Función para eliminar un producto del carrito
   const handleEliminarProducto = (id) => {
     eliminarProducto(id);
-
-    // Recalcular la nueva cantidad total después de eliminar un producto
-    let nuevaCantidadTotal = 0;
-    cart.forEach((producto) => {
-      nuevaCantidadTotal += producto.cantidad;
-    });
-
-    // Actualizar la cantidad total
-    actualizarCantidadTotal(nuevaCantidadTotal);
-
   };
 
   // Función para vaciar el carrito
   const handleVaciarCarrito = () => {
     vaciarCarrito();
-    // Actualizar la cantidad total a 0
-    actualizarCantidadTotal(0);
   };
 
   return (
@@ -59,7 +48,9 @@ const Cart = ({ actualizarCantidadTotal }) => {
       </div>
       <hr />
       <div>
-        <Link to='/checkout' className={style.finalizar}>CONTINUE TO CKECKOUT</Link>
+        <Link to="/checkout" className={style.finalizar}>
+          CONTINUE TO CHECKOUT
+        </Link>
       </div>
     </div>
   );

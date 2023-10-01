@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import style from "./Cart.module.css";
-import { CartContext } from "../Context/CartContext";
 import Swal from "sweetalert2";
+import { CartContext } from "../Context/CartContext";
 
-const CartItem = ({ item, cantidad }) => {
-  const { eliminarProducto } = useContext(CartContext);
+const CartItem = ({ item, cantidad, onEliminarProducto }) => {
+  const { eliminarProducto, actualizarCantidadProducto } = useContext(CartContext);
+  const [contador, setContador] = useState(cantidad);
 
   // Función para manejar la eliminación del producto
   const handleEliminarProducto = () => {
     eliminarProducto(item.id);
-
+    onEliminarProducto(item.id); // Llama a la función desde el padre
     // Muestra la alerta de éxito
     Swal.fire({
       icon: "success",
@@ -17,12 +18,26 @@ const CartItem = ({ item, cantidad }) => {
     });
   };
 
+  const aumentarContador = () => {
+    const nuevoContador = contador + 1;
+    setContador(nuevoContador);
+    actualizarCantidadProducto(item.id, nuevoContador);
+  };
+
+  const disminuirContador = () => {
+    if (contador > 1) {
+      const nuevoContador = contador - 1;
+      setContador(nuevoContador);
+      actualizarCantidadProducto(item.id, nuevoContador);
+    }
+  };
+
   return (
     <div>
       <h4> {item.name} </h4>
       <div className={style.alineado}>
         <div>
-          <p><strong>Cantidad de producto:</strong> {cantidad}</p>
+          <p><strong>Cantidad de producto:</strong> {contador}</p>
         </div>
         <div>
           <p><strong>Precio por unidad:</strong> U$S {item.price}</p>
@@ -31,6 +46,11 @@ const CartItem = ({ item, cantidad }) => {
       <button className={style.delete} onClick={handleEliminarProducto}>
         <p>❌</p>
       </button>
+      <div>
+        <button onClick={disminuirContador}>-</button>
+        <span>{contador}</span>
+        <button onClick={aumentarContador}>+</button>
+      </div>
     </div>
   );
 };
