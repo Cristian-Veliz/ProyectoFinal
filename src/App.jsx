@@ -16,6 +16,7 @@ import { CarritoProvider } from './components/Context/CartContext';
 import Login from './views/Login/Login';
 import NewPassword from './components/NewPassword/NewPassword';
 import Register from './components/RegisterUser/Register';
+import LoginGetUser from './views/Login/LoginGetUser';
 
 function App() {
   const { pathname } = useLocation();
@@ -37,6 +38,7 @@ function App() {
             actualizarCantidadTotal={actualizarCantidadTotal}
           />
         )}
+        
         <Switch>
           <Route exact path='/' component={Landing} />
           <Route exact path='/home' component={Home} />
@@ -69,7 +71,7 @@ function App() {
               />
               )}
           />
-        </Switch>
+        </Switch><LoginGetUser/>
       </CarritoProvider>
     </div>
   );

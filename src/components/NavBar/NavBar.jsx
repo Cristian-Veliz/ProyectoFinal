@@ -4,9 +4,19 @@ import LogoNav from '../../assets/LogoDivano.jpg';
 
 
 import CardWidget from '../CardWidget/CardWidget';
-import { CartContext } from "../Context/CartContext";
+
+import { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { CartContext } from '../Context/CartContext';
+import LoginGetUser from '../../views/Login/LoginGetUser';
 
 const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
+  const context = useContext(CartContext);
+    const userData= useSelector((state) => state.user)
+
+    const loginToShow = () => {
+      context.openLogin();
+    };
   return (
     <div className={style.mainContainer}>
       <nav className={style.navbar}>
@@ -43,11 +53,13 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
           </div>
           <nav>
             <div className={style.cartContainer}>
+            <button className={style.divLink} onClick={loginToShow}>x</button>
               <CardWidget cantidadTotal={cantidadTotal} actualizarCantidadTotal={actualizarCantidadTotal} />
             </div>
           </nav>
         </div>
       </nav>
+      <LoginGetUser/>
     </div>
   );
 };

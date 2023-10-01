@@ -44,8 +44,8 @@ function Home() {
         return furniture.Categories.some((category) => category.name === filteredCategory);
       });
 
-  console.log('filteredCategory:', filteredCategory);
-  console.log('filteredFurnituresByCategory:', filteredFurnituresByCategory);
+  // console.log('filteredCategory:', filteredCategory);
+  // console.log('filteredFurnituresByCategory:', filteredFurnituresByCategory);
 
   return (
     <div>

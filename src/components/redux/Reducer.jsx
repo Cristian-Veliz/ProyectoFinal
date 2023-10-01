@@ -4,6 +4,8 @@ import {
   FURNITURES_SORT_BY_NAME,
   FILTER_BY_PRICE,
   LOGIN_SUCCESS,
+  LOGIN_GET_USER,
+  LOGOUT,
   PREV,
   NEXT,
 } from "./actions/ActionsTypes";
@@ -19,11 +21,12 @@ const initialState = {
   minPrice: "",
   maxPrice: "",
   token: null,
+  user: {},
 };
 
 export default function reducer(state = initialState, { type, payload }) {
-  console.log("Reducer type:", type); // Agregado para depuración
-  console.log("Reducer payload:", payload); // Agregado para depuración
+  // console.log("Reducer type:", type); // Agregado para depuración
+  // console.log("Reducer payload:", payload); // Agregado para depuración
 
   switch (type) {
     case GET_ALL_FURNITURES:
@@ -51,7 +54,7 @@ export default function reducer(state = initialState, { type, payload }) {
         allFurnitures: sortedFurnituresByName,
       };
 
-    case FILTER_BY_PRICE: 
+    case FILTER_BY_PRICE:
       const { minPrice, maxPrice } = payload;
       const filteredFurnituresByPrice = state.temporal.filter((furniture) => {
         const price = parseFloat(furniture.price);
@@ -78,11 +81,23 @@ export default function reducer(state = initialState, { type, payload }) {
         numPage: state.numPage + 1,
       };
 
-      case LOGIN_SUCCESS:
-        return {
-          ...state,
-          token: payload,
-        };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        token: payload,
+      };
+
+    case LOGIN_GET_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: null,
+        user: {}, 
+      };
 
     default:
       return { ...state };
