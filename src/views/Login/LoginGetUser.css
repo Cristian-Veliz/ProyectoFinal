@@ -1,0 +1,31 @@
+.product-detail{
+    width: 224px;
+    /* height: calc(87vh - 114px); */
+    /* top: 92px; */
+    margin: auto;
+    border: solid;
+    padding: 36px;
+    border-radius: 18px;
+    position: absolute;
+    top: 13%;
+    background-color: white;
+    right: 0;
+}
+.open{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.hidden{
+    display: none;
+}
+.close{
+    border-radius: 82px;
+    padding: 6px;
+    font-size: 36px;
+    align-content: flex-start;
+    cursor: pointer;
+    height: 45px;
+    width: 18px;
+}

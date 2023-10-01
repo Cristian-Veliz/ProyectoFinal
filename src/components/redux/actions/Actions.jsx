@@ -6,6 +6,8 @@ import {
   FILTER_BY_PRICE,
   SORT_BY_PRICE,
   LOGIN_SUCCESS,
+  LOGIN_GET_USER,
+  LOGOUT,
   PREV,
   NEXT,
   GO_TO_FIRST_PAGE,
@@ -18,21 +20,20 @@ import {
 //ACTIONS CREATORS
 //http://localhost:5000/products
 
-
 export const getAllFurnitures = () => {
   return async (dispatch) => {
     try {
       const response = await axios.get("http://localhost:3001/product");
-      
+
       // Ordenar los datos por id de menor a mayor
       const sortedData = response.data.sort((a, b) => a.id - b.id);
-      
+
       dispatch({ type: GET_ALL_FURNITURES, payload: sortedData });
     } catch (error) {
       console.error("Error al intentar renderizar los muebles", error.message);
     }
   };
-}
+};
 
 export function getFurnituresByName(name) {
   return async (dispatch) => {
@@ -109,11 +110,38 @@ export function crearOrden(orden) {
 export const loginSuccess = (form) => {
   return async function (dispatch) {
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", form);
+      const response = await axios.post(
+        "http://localhost:3001/auth/login",
+        form
+      );
       const { tokenSession } = response.data;
+      localStorage.setItem("token", response.data.tokenSession);
       dispatch({ type: LOGIN_SUCCESS, payload: tokenSession });
     } catch (error) {
-      console.error("Error de inicio de sesión:", error)}
+      console.error("Error de inicio de sesión:", error);
+    }
+  };
+};
+export const loginGetUser = (token) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get("http://localhost:3001/user/auth", {
+        headers: {
+          Authorization: token,
+        },
+      });
+      const { name, email } = response.data;
+      dispatch({ type: LOGIN_GET_USER, payload: { name, email } });
+    } catch (error) {
+      console.error("Error de inicio de sesión:", error);
+    }
+  };
+};
+export const logout = () => {
+  localStorage.removeItem("token");
+
+  return {
+    type: LOGOUT,
   };
 };
 

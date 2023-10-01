@@ -32,7 +32,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(loginSuccess(userData));
-    history.push("/");
+    history.push("/home");
   };
 
 
