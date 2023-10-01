@@ -1,49 +1,77 @@
 import React, { useState, useEffect } from 'react';
-import style from './MyOrders.module.css'; // Importa el CSS Module
-import { useSelector } from "react-redux";
-import axios from "axios";
+import axios from 'axios';
+import style from './MyOrders.module.css'; 
+import { useSelector } from 'react-redux';
+import pedidos from './assets/pedidos.gif'
+
 
 function MyOrders() {
   const email = useSelector((state) => state.email);
-  const [latestOrder, setLatestOrder] = useState(null);
+  const [ordersFromDB, setOrdersFromDB] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/order/get/${email}`);
-        const latestOrder = response.data[response.data.length - 1];
-        setLatestOrder(latestOrder);
-      } catch (error) {
-        console.error('Error al obtener las órdenes:', error);
-      }
-    };
+    // Se obtienen las órdenes almacenadas en localStorage
+    const storedOrders = JSON.parse(localStorage.getItem('orders'));
 
-    fetchOrders();
+    if (storedOrders) {
+      setOrdersFromDB(storedOrders);
+      setIsLoading(false);
+    } else {
+      // Si no hay órdenes almacenadas en localStorage, se obtienen las órdenes de la base de datos
+      const fetchOrdersFromDB = async () => {
+        try {
+          const response = await axios.get(`http://localhost:3001/order/get/${email}`);
+          const orders = response.data;
+
+          // Almacena las órdenes en localStorage para futuras visitas
+          localStorage.setItem('orders', JSON.stringify(orders));
+
+          setOrdersFromDB(orders);
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Error al obtener las órdenes de la base de datos:', error);
+          setIsLoading(false);
+        }
+      };
+
+      fetchOrdersFromDB();
+    }
   }, [email]);
 
   return (
-    <div>
-      <h1 className={style.title}>📦 Tus órdenes son las siguientes 📦:</h1>
-      {latestOrder ? (
-        <div key={latestOrder.ordenId} className={style.finalizar}>
-          <br />
-          <p className={style.orderId}>Orden ID: {latestOrder.ordenId}</p>
-          <p className={style.orderId}>Fecha de Orden: {latestOrder.orderDate}</p>
-          <p className={style.name}>Nombre de Titular: {`${latestOrder.nombre} ${latestOrder.apellido}`}</p>
-          <p className={style.total}>Monto Total: U$S {latestOrder.total}</p>
-          <p className={style.total}>Estatus de Orden: {latestOrder.status}</p>
+    <div className={style.centrar}>
+      <h1 className={style.title}>📦 Tus órdenes son las siguientes: 📦</h1>
+      {isLoading ? (
+        <p>Cargando órdenes...</p>
+      ) : ordersFromDB.length > 0 ? (
+        // Mostrar las órdenes desde localStorage o la base de datos
+        <div className={style.allOrders}>
+          {ordersFromDB.map((order) => (
+            <div key={order.ordenId} className={style.finalizar}>
+              <br />
+              <p><strong>Numero de Orden: </strong> {order.ordenId}</p>
+              <p><strong>Fecha de Orden: </strong> {order.orderDate}</p>
+              <p><strong>Nombre de Titular: </strong>{`${order.nombre} ${order.apellido}`}</p>
+              <p><strong>Monto Total: </strong>U$S {order.total}</p>
+              <p><strong>Estatus de Orden: </strong> {order.status}</p>
 
-          {latestOrder.Products.map((product) => (
-            <div key={product.id} className={style.product}>
-              <p>Nombre de Producto: {product.name}</p>
-              <p>Categoría de Producto: {product.category}</p>
+              {order.Products.map((product) => (
+                <div key={product.id} className={style.product}>
+                  <p><strong>Nombre de Producto: </strong>{product.name}</p>
+                  <p><strong>Categoría de Producto: </strong>{product.category}</p>
+                </div>
+              ))}
+              <br />
             </div>
-            
           ))}
-          <br />
         </div>
       ) : (
-        <p>Cargando órden...</p>
+         <div className={style.sinOrdenes}>
+           <p> ❌¡Aun No tienes órdenes creadas!❌</p>
+            <img className={style.gif} src={pedidos} alt="orders" />
+          </div>
+        
       )}
     </div>
   );

@@ -69,6 +69,8 @@ function App() {
           <Route exact path='/checkout' component={Checkout} /> 
           <Route exact path='/login' component={Form} />
           <Route exact path='/buy' component={CheckoutForm} />
+          <Route exact path='/register' component={Register} />
+
           <Route
             exact
             path='/cart'

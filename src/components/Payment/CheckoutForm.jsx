@@ -4,7 +4,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import Swal from 'sweetalert2';
 import { useHistory } from "react-router-dom"; 
 import styles from "./CheckoutForm.module.css"; 
-import MyOrders from "../../views/MyOrders/MyOrders"
 import { useDispatch } from "react-redux";
 //require('dotenv').config();
 //const{CLAVE_PUBLICA_STRIPE}=process.env;
