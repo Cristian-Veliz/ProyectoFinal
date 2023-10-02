@@ -20,6 +20,10 @@ import Login from './views/Login/Login';
 import NewPassword from './components/NewPassword/NewPassword';
 import Register from './components/RegisterUser/Register';
 import LoginGetUser from './views/Login/LoginGetUser';
+import { getUserInfoFromLocalStorage } from './helpers/AuthToken';
+import NavBarLanding from './components/NavBarLanding/NavBarLanding';
+
+
 
 function App() {
   const { pathname } = useLocation();
@@ -41,16 +45,25 @@ function App() {
       });
     },
   };
+  const userInfo = getUserInfoFromLocalStorage();
+
+
 
   return (
     <div className="App">
       <CarritoProvider>
-        {pathname === '/' ? null : (
+        {/* {pathname === '/' ? null : (
           <NavBar
             cantidadTotal={cantidadTotal}
             actualizarCantidadTotal={actualizarCantidadTotal}
           />
-        )}
+        )} */}
+        {
+          userInfo === null ? <NavBarLanding/> : <NavBar
+          cantidadTotal={cantidadTotal}
+          actualizarCantidadTotal={actualizarCantidadTotal}
+        />
+        }
         
         <Switch>
           <Route exact path='/' component={Landing} />
@@ -74,6 +87,7 @@ alert={alert}
           <Route exact path='/login' component={Login} /> 
           <Route exact path='/buy' component={CheckoutForm} /> 
           <Route exact path='/register' component={Register} /> 
+          <Route exact path='/profile' component={LoginGetUser} /> 
           <Route
             exact
             path='/cart'
@@ -86,7 +100,7 @@ alert={alert}
               )}
           />
         </Switch>
-        <LoginGetUser/>
+        
       </CarritoProvider>
     </div>
   );

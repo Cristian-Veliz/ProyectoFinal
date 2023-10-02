@@ -19,7 +19,7 @@ export default function LoginGetUser() {
           dispatch(loginGetUser(token));
           
         }
-  }, [dispatch]);
+  }, []);
   console.log("userdata", userData);
   if (!userData) {
     return <p>Cargando...</p>;
@@ -32,9 +32,9 @@ export default function LoginGetUser() {
 
   return (
     <div>
-      <div className={`product-detail ${context.LoginOpen ? "open" : "hidden"}`}>
+      <div className={`product-detail `}>
         <div>
-        <div onClick={()=>context.closeLogin()} className="close"> x </div>
+        
           <h1>Perfil de usuario</h1> {/* Título */}
           <p>Nombre: {userData.name}</p>
           <p>Email: {userData.email}</p>

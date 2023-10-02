@@ -5,6 +5,7 @@ import styles from "../../views/Login/Form.module.css";
 import validation from "../../views/Login/validation";
 import Logo from "../../assets/LogoDivano.jpg";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 
 export default function Register() {
@@ -37,8 +38,18 @@ export default function Register() {
         await axios.post("http://localhost:3001/auth/wellcome", {
         email: userData.email,
       });
-        history.push("/");
-        // alert(`Bienvenido ${name}`);
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro Exitoso',
+        html: 'Bienvenido',
+        timer: 3000, // Tiempo en milisegundos (3 segundos)
+        showConfirmButton: false,
+        timerProgressBar: true,
+        didClose: () => {
+          // Redirigir automáticamente a '/pay' después del tiempo especificado
+          history.push('/');
+        },
+      });
       } catch (error) {
         console.error("Error de inicio de sesión:", error);
       }

@@ -20,9 +20,9 @@ import imgDestacado5 from "../../assets/CamaBox.jpg";
 function Landing() {
   return (
     <div>
-      <div className={style.navbar}>
+      {/* <div className={style.navbar}>
         <NavBarLanding />
-      </div>
+      </div> */}
 
       <div className={style.landing}>
         <div className={style.imageContainer}>
