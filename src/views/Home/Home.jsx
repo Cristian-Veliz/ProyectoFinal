@@ -11,6 +11,8 @@ import FilterPrice from '../../components/FilterPrice/FilterPrice';
 import { categoryFilter } from '../../helpers/categoryFilter';
 import FilterCategory from '../../components/FilterCategory/FilterCategory';
 import loading from '../../assets/loading.gif';
+import Footer from '../../components/Footer/Footer';
+
 
 function Home() {
   const dispatch = useDispatch();
@@ -77,10 +79,13 @@ function Home() {
                   ? filteredFurnitures
                   : filteredFurnituresByCategory
               }
-            />
-          )}
+              />
+              )}
         </>
       )}
+      <div className={style.footer}>
+      <Footer></Footer>
+      </div>
     </div>
   );
 }

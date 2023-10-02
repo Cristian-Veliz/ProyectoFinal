@@ -3,6 +3,7 @@ import style from "./Cart.module.css";
 import { CartContext } from "../Context/CartContext";
 import { Link } from "react-router-dom";
 import CartItem from "../CartItem/CartItem";
+import carritovacio from "./assets/carritovacio.png"
 
 const Cart = () => {
   const { cart, vaciarCarrito, total, cantidadTotal, eliminarProducto } = useContext(CartContext);
@@ -10,7 +11,8 @@ const Cart = () => {
   if (cantidadTotal === 0) {
     return (
       <>
-        <h2>No hay Productos en el Carrito</h2>
+        <h2>Mi carrito de compras:</h2>
+        <img className={style.carrito} src={carritovacio} alt="ImgCarritoVacio" />
         <Link to="/home" className={style.finalizar}>
           Productos
         </Link>
@@ -41,8 +43,8 @@ const Cart = () => {
       </div>
       <div className={style.medio}>
         <h3>Cantidad Total de Orden: {cantidadTotal} </h3>
-        <h3 className={style.precio}>Total: U$S {total.toFixed(2)} </h3>
-        <button className={style.finalizar2} onClick={handleVaciarCarrito}>
+        <h3>Total: U$S {total.toFixed(2)} </h3>
+        <button className={style.finalizar} onClick={handleVaciarCarrito}>
           DELETE CART
         </button>
       </div>

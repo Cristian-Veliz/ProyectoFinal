@@ -4,6 +4,7 @@ import Card from '../Card/Card';
 import Paginate from '../Paginate/Paginate';
 import { useSelector } from 'react-redux';
 
+
 const CardContainer = ({ allFurnitures }) => {
   const { numPage } = useSelector((state) => state);
   const furnitures = allFurnitures;

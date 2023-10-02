@@ -6,6 +6,8 @@
   position:absolute;
   margin-left: 150px;
   font-size: 10px;
+  max-width: 100%; /* Establece el ancho máximo al 100% del contenedor padre */
+  overflow-x: auto; /* Agrega una barra de desplazamiento horizontal si es necesario */
   
 }
 .paginate {

@@ -25,6 +25,7 @@ import NavBarLanding from './components/NavBarLanding/NavBarLanding';
 
 
 
+
 function App() {
   const { pathname } = useLocation();
 
@@ -73,13 +74,13 @@ function App() {
             path='/products/:id'
             render={(props) => (
               <Detail
-                {...props}
-                actualizarCantidadTotal={actualizarCantidadTotal}
-                cantidadTotal={cantidadTotal}
-alert={alert} 
+              {...props}
+              actualizarCantidadTotal={actualizarCantidadTotal}
+              cantidadTotal={cantidadTotal}
+              alert={alert} 
               />
             )}
-          />
+            />
           <Route exact path='/orders' component={MyOrders} />
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
@@ -98,7 +99,7 @@ alert={alert}
               cantidadTotal={cantidadTotal}
               />
               )}
-          />
+              />
         </Switch>
         
       </CarritoProvider>

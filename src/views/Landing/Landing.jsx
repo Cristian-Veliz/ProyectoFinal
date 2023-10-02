@@ -4,6 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NavBarLanding from "../../components/NavBarLanding/NavBarLanding";
 import imgDivanoPublicidad from "../../assets/DivanoPublicidad.jpg";
+import Footer from "../../components/Footer/Footer";
 import imgLanding1 from "../../assets/Landing1.png";
 import imgLanding2 from "../../assets/Landing2.jpg";
 import imgLanding3 from "../../assets/Landing3.jpg";
@@ -92,6 +93,7 @@ function Landing() {
           alt="DivanoPublicidad"
         />
       </div>
+      <Footer/>
     </div>
   );
 }
