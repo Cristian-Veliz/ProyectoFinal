@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';import Login from './views/Login/Login';
 import NewPassword from './components/NewPassword/NewPassword';
 import Register from './components/RegisterUser/Register';
 
+
 function App() {
   const { pathname } = useLocation();
 
@@ -56,13 +57,13 @@ function App() {
             path='/products/:id'
             render={(props) => (
               <Detail
-                {...props}
-                actualizarCantidadTotal={actualizarCantidadTotal}
-                cantidadTotal={cantidadTotal}
-                alert={alert} 
+              {...props}
+              actualizarCantidadTotal={actualizarCantidadTotal}
+              cantidadTotal={cantidadTotal}
+              alert={alert} 
               />
             )}
-          />
+            />
           <Route exact path='/orders' component={MyOrders} />
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
@@ -70,7 +71,6 @@ function App() {
           <Route exact path='/login' component={Form} />
           <Route exact path='/buy' component={CheckoutForm} />
           <Route exact path='/register' component={Register} />
-
           <Route
             exact
             path='/cart'
@@ -81,7 +81,7 @@ function App() {
               cantidadTotal={cantidadTotal}
               />
               )}
-          />
+              />
         </Switch>
       </CarritoProvider>
     </div>
