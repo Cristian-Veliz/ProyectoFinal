@@ -5,18 +5,21 @@ import NavBar from './components/NavBar/NavBar';
 import Landing from './views/Landing/Landing';
 import Home from './views/Home/Home';
 import Detail from './views/Detail/Detail.jsx';
+// import Login from './views/Login/Login';
 import MyOrders from './views/MyOrders/MyOrders';
 import Contact from './views/Contact/Contact';
 import About from './views/About/About';
 import CardWidget from './components/CardWidget/CardWidget';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
-import Form from './components/FormLogin/Form';
+// import Form from './components/FormLogin/Form';
 import { CarritoProvider } from './components/Context/CartContext';
 import CheckoutForm from './components/Payment/CheckoutForm';
-import Swal from 'sweetalert2';import Login from './views/Login/Login';
+import Swal from 'sweetalert2';
+import Login from './views/Login/Login';
 import NewPassword from './components/NewPassword/NewPassword';
 import Register from './components/RegisterUser/Register';
+import LoginGetUser from './views/Login/LoginGetUser';
 
 
 function App() {
@@ -49,6 +52,7 @@ function App() {
             actualizarCantidadTotal={actualizarCantidadTotal}
           />
         )}
+        
         <Switch>
           <Route exact path='/' component={Landing} />
           <Route exact path='/home' component={Home} />
@@ -68,9 +72,9 @@ function App() {
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
           <Route exact path='/checkout' component={Checkout} /> 
-          <Route exact path='/login' component={Form} />
-          <Route exact path='/buy' component={CheckoutForm} />
-          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} /> 
+          <Route exact path='/buy' component={CheckoutForm} /> 
+          <Route exact path='/register' component={Register} /> 
           <Route
             exact
             path='/cart'
@@ -83,6 +87,7 @@ function App() {
               )}
               />
         </Switch>
+        <LoginGetUser/>
       </CarritoProvider>
     </div>
   );

@@ -25,6 +25,7 @@ export default function RecoveryEmail() {
   };
 
   return (
+    
     <div className={`product-detail ${context.recoveryOpen ? "open" : "hidden"}`}>
       <div onClick={() => context.closeRecovery()} className="close">x</div>
       <h2>Olvidé la contraseña</h2>

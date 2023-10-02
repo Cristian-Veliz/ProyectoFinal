@@ -10,9 +10,10 @@ import axios from "axios";
 export default function Register() {
   
   const [userData, setUserData] = useState({
+    name:"",
+    lastName: "",
     email: "",
     password: "",
-    name:"",
   });
   const [errors, setErrors] = useState({});
   const history = useHistory();
@@ -30,9 +31,12 @@ export default function Register() {
     event.preventDefault();
     if (Object.keys(errors).length === 0) {
       try {
-        const response = await axios.post("http://localhost:3001/auth/register", userData);
+        const response = await axios.post("http://localhost:3001/user/create-customer", userData);
         // const { name } = response.data;
         console.log("ddddd", response.data);
+        await axios.post("http://localhost:3001/auth/wellcome", {
+        email: userData.email,
+      });
         history.push("/");
         // alert(`Bienvenido ${name}`);
       } catch (error) {
@@ -44,7 +48,7 @@ export default function Register() {
 //     dispatch(loginSuccess(userData));
 //     history.push("/");
 //   };
-const isButtonDisabled = !userData.email || !userData.password || !userData.name;
+const isButtonDisabled = !userData.email || !userData.password || !userData.name || !userData.lastName;
 
   // const detailToShow = () => {
   //   context.openRecovery();
@@ -55,14 +59,21 @@ const isButtonDisabled = !userData.email || !userData.password || !userData.name
       <div className={styles.contenedor}>
         <div>
           <img src={Logo} alt="Logo" />
+          {/* <h1>Bienvenido</h1> Título */}
         </div>
         <form onSubmit={handleSubmit}>
-          <h1>Bienvenido</h1> {/* Título */}
           <label>Name: </label>
           <input
             type="text"
             name="name"
             value={userData.name}
+            onChange={handleChange}
+          />
+          <label>Lastname: </label>
+          <input
+            type="text"
+            name="lastName"
+            value={userData.lastName}
             onChange={handleChange}
           />
           <label>Email: </label>

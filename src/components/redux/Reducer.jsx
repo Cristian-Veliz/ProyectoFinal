@@ -5,6 +5,8 @@ import {
   FILTER_BY_PRICE,
   LOGIN_SUCCESS,
   SORT_BY_PRICE,
+  LOGIN_GET_USER,
+  LOGOUT,
   PREV,
   NEXT,
   GO_TO_FIRST_PAGE,
@@ -27,11 +29,12 @@ const initialState = {
   orders: [],
   token: null,
   email: "",
+  user: {},
 };
 
 export default function reducer(state = initialState, { type, payload }) {
-  console.log("Reducer type:", type); // Agregado para depuración
-  console.log("Reducer payload:", payload); // Agregado para depuración
+  // console.log("Reducer type:", type); // Agregado para depuración
+  // console.log("Reducer payload:", payload); // Agregado para depuración
 
   switch (type) {
     case GET_ALL_FURNITURES:
@@ -131,6 +134,18 @@ export default function reducer(state = initialState, { type, payload }) {
       return {
         ...state,
         email: payload,
+      };
+
+    case LOGIN_GET_USER:
+      return {
+        ...state,
+        user: payload,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: null,
+        user: {}, 
       };
 
     default:
