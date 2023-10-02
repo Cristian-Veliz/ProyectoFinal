@@ -179,13 +179,6 @@ export const CarritoProvider = ({ children }) => {
     }
   };
 
-  const openRecovery = () => {
-    setRecoveryOpen(true);
-  };
-
-  const closeRecovery = () => {
-    setRecoveryOpen(false);
-  };
 
   return (
     <CartContext.Provider

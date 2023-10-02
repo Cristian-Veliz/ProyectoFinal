@@ -8,7 +8,7 @@ import CardWidget from '../CardWidget/CardWidget';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { CartContext } from '../Context/CartContext';
-import LoginGetUser from '../../views/Login/LoginGetUser';
+// import LoginGetUser from '../../views/Login/LoginGetUser';
 
 const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
   const context = useContext(CartContext);
@@ -59,7 +59,7 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
           </nav>
         </div>
       </nav>
-      <LoginGetUser/>
+      {/* <LoginGetUser/> */}
     </div>
   );
 };

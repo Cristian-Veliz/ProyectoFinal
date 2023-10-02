@@ -10,10 +10,10 @@ import axios from "axios";
 export default function Register() {
   
   const [userData, setUserData] = useState({
-    email: "",
-    password: "",
     name:"",
     lastName: "",
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({});
   const history = useHistory();
@@ -35,7 +35,7 @@ export default function Register() {
         // const { name } = response.data;
         console.log("ddddd", response.data);
         await axios.post("http://localhost:3001/auth/wellcome", {
-        email,
+        email: userData.email,
       });
         history.push("/");
         // alert(`Bienvenido ${name}`);
