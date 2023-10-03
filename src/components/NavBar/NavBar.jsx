@@ -8,6 +8,7 @@ import CardWidget from '../CardWidget/CardWidget';
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { CartContext } from '../Context/CartContext';
+import { logout } from '../redux/actions/Actions';
 // import LoginGetUser from '../../views/Login/LoginGetUser';
 
 const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
@@ -17,6 +18,12 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
     const loginToShow = () => {
       context.openLogin();
     };
+
+    const handleLogout = () => {
+      dispatch(logout());
+      history.push("/");
+    };
+
   return (
     <div className={style.mainContainer}>
       <nav className={style.navbar}>
@@ -45,15 +52,16 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
                 My Orders
               </Link>
             </div>
-            <div className={style.divLink}>
-              <Link className={style.container} to="/">
+            <div className={style.divLink} onClick={handleLogout}>
+              <Link className={style.container} to="/" >
                 Logout
               </Link>
             </div>
           </div>
           <nav>
             <div className={style.cartContainer}>
-            <button className={style.divLink} onClick={loginToShow}>x</button>
+           
+            <Link to="/profile" className={style.container}>Hola, {userData.name}</Link>
               <CardWidget cantidadTotal={cantidadTotal} actualizarCantidadTotal={actualizarCantidadTotal} />
             </div>
           </nav>

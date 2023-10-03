@@ -16,6 +16,7 @@ import {
   CREATE_EMAIL,
 
 } from "./ActionsTypes";
+import { getUserInfoFromLocalStorage } from "../../../helpers/AuthToken";
 
 //ACTIONS CREATORS
 //http://localhost:5000/products
@@ -114,8 +115,10 @@ export const loginSuccess = (form) => {
         "http://localhost:3001/auth/login",
         form
       );
-      const { tokenSession } = response.data;
-      localStorage.setItem("token", response.data.tokenSession);
+      const { tokenSession,data } = response.data;
+      console.log("data", response.data);
+      localStorage.setItem("token", tokenSession);
+      localStorage.setItem("user", JSON.stringify({data}));
       dispatch({ type: LOGIN_SUCCESS, payload: tokenSession });
     } catch (error) {
       console.error("Error de inicio de sesión:", error);
@@ -130,8 +133,9 @@ export const loginGetUser = (token) => {
           Authorization: token,
         },
       });
-      const { name, email } = response.data;
-      dispatch({ type: LOGIN_GET_USER, payload: { name, email } });
+      const user = response.data;
+      getUserInfoFromLocalStorage()
+      dispatch({ type: LOGIN_GET_USER, payload:user });
     } catch (error) {
       console.error("Error de inicio de sesión:", error);
     }
@@ -139,6 +143,7 @@ export const loginGetUser = (token) => {
 };
 export const logout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("user");
 
   return {
     type: LOGOUT,

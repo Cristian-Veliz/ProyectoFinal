@@ -22,9 +22,9 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 function Landing() {
   return (
     <div>
-      <div className={style.navbar}>
+      {/* <div className={style.navbar}>
         <NavBarLanding />
-      </div>
+      </div> */}
 
       <div className={style.landing}>
         <div className={style.imageContainer}>
