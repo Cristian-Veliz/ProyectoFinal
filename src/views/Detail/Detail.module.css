@@ -66,3 +66,11 @@
     overflow: auto; /* Habilita el desplazamiento si la imagen es más grande que el contenedor */
   }
   
+  .sinStock{
+    display: inline-flex;
+    position: fixed;
+    left: +395px;
+    bottom: 165px;
+    color: red;
+
+  }

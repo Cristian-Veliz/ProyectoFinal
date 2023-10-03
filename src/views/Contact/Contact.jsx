@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import "./Contact.module.css"
 import styles from './Contact.module.css';
+import FooterSimple from '../../components/FooterSimple/FooterSimple';
 
 const Contact = () => {
   const datosFormulario = useRef(false);
@@ -117,6 +118,9 @@ const Contact = () => {
           </div>
         </div>
       )}
+      <div className={styles.footer}>
+      <FooterSimple/>
+      </div>
     </div>
   );
 };

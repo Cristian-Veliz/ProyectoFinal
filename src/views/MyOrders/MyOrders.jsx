@@ -3,6 +3,7 @@ import axios from 'axios';
 import style from './MyOrders.module.css'; 
 import { useSelector } from 'react-redux';
 import pedidos from './assets/pedidos.gif'
+import FooterSimple from '../../components/FooterSimple/FooterSimple'
 
 
 function MyOrders() {
@@ -72,7 +73,8 @@ function MyOrders() {
             <img className={style.gif} src={pedidos} alt="orders" />
           </div>
         
-      )}
+        )}
+        <FooterSimple/>
     </div>
   );
 }

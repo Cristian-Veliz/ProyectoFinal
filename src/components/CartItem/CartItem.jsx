@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import style from "./Cart.module.css";
 import Swal from "sweetalert2";
 import { CartContext } from "../Context/CartContext";
@@ -6,6 +6,16 @@ import { CartContext } from "../Context/CartContext";
 const CartItem = ({ item, cantidad, onEliminarProducto }) => {
   const { eliminarProducto, actualizarCantidadProducto } = useContext(CartContext);
   const [contador, setContador] = useState(cantidad);
+  const [sinStock, setSinStock] = useState(false);
+
+  // Validar el stock cada vez que cambie la cantidad
+  useEffect(() => {
+    if (contador > item.stock) {
+      setSinStock(true);
+    } else {
+      setSinStock(false);
+    }
+  }, [contador, item.stock]);
 
   // Función para manejar la eliminación del producto
   const handleEliminarProducto = () => {
@@ -38,6 +48,9 @@ const CartItem = ({ item, cantidad, onEliminarProducto }) => {
       <div className={style.alineado}>
         <div>
           <p><strong>Cantidad de producto:</strong> {contador}</p>
+          {sinStock && (
+            <p style={{ color: "red" }}>Producto momentáneamente sin stock</p>
+          )}
         </div>
         <div>
           <p><strong>Precio por unidad:</strong> U$S {item.price}</p>
@@ -56,3 +69,4 @@ const CartItem = ({ item, cantidad, onEliminarProducto }) => {
 };
 
 export default CartItem;
+

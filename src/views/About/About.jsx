@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from './About.module.css'; // Importa el módulo CSS
+import styles from './About.module.css'; 
+import FooterSimple from '../../components/FooterSimple/FooterSimple';
 
 export default function About() {
     return (
@@ -38,6 +39,10 @@ export default function About() {
                     <img className={styles['img-PostgreSQL']} src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="" />
                     <h1 className={styles['text-PostgreSQL']}>PostgreSQL</h1>
                 </div>
+            </div>
+            <div>
+
+            <FooterSimple/>
             </div>
         </section>
     );
