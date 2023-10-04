@@ -45,7 +45,7 @@ const Cart = () => {
         <h3>Cantidad Total de Orden: {cantidadTotal} </h3>
         <h3>Total: U$S {total.toFixed(2)} </h3>
         <button className={style.finalizar} onClick={handleVaciarCarrito}>
-          DELETE CART
+          DELETE CART🗑️
         </button>
       </div>
       <hr />

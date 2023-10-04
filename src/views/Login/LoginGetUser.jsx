@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { CartContext } from "../../components/Context/CartContext";
 import "./LoginGetUser.css";
 import { getToken } from "../../helpers/AuthToken";
+import perfil from './assets/perfil.jpg';
 
 export default function LoginGetUser() {
   const context = useContext(CartContext);
@@ -32,15 +33,18 @@ export default function LoginGetUser() {
 
   return (
     <div>
-      <div className={`product-detail `}>
+      <div className={`user-detail`}>
+      
         <div>
-        
-          <h1>Perfil de usuario</h1> {/* Título */}
-          <p>Nombre: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <button onClick={handleLogout}>Cerrar Sesión</button>
-          
+          <img src={perfil} alt="User" />
+          <h1>User profile</h1> 
+          <button>Edit profile📝</button>
         </div>
+          <p>Name: {userData.name}</p>
+          <p>Email: {userData.email}</p>
+          <button onClick={handleLogout}>Log Out</button>
+          
+      
       </div>
     </div>
   );

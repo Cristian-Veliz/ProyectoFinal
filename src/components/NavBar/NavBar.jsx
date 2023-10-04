@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import style from './demo.module.css';
+import style from './Navbar.module.css';
 import LogoNav from '../../assets/LogoDivano.jpg';
 
 
@@ -53,7 +53,7 @@ const NavBar = ({ cantidadTotal, actualizarCantidadTotal }) => {
               </Link>
             </div>
             <div className={style.divLink} onClick={handleLogout}>
-              <Link className={style.container} to="/" >
+              <Link className={style.container} to="/profile" >
                 Logout
               </Link>
             </div>

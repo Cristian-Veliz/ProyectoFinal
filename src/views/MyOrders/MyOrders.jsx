@@ -42,7 +42,7 @@ function MyOrders() {
 
   return (
     <div className={style.centrar}>
-      <h1 className={style.title}>📦 Tus órdenes son las siguientes: 📦</h1>
+      <h1 className={style.title}>📦 Your orders are as follows: 📦</h1>
       {isLoading ? (
         <p>Cargando órdenes...</p>
       ) : ordersFromDB.length > 0 ? (

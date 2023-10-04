@@ -11,7 +11,7 @@ export default function About() {
             <div className={styles.about}>
                 <h1>🌟 ¡BIENVENIDOS A DIVANO! 🌟</h1>
                 <p>
-                "<strong>Divano</strong> es tu ecommerse de <strong>muebles en línea</strong>. Somos un equipo de cuatro apasionados programadores en pleno aprendizaje y desarrollo en el prestigioso bootcamp de Full Stack Developer de <strong>Henry</strong>. Nuestra misión es proporcionarte una <strong>experiencia de compra de muebles en linea excepcional</strong>. Hemos diseñado nuestro sitio web para que puedas buscar y renovar tus muebles favoritos de <strong>forma rápida y sencilla</strong>. Además, garantizamos la máxima seguridad de tus datos personales y de pago, para que puedas comprar con total confianza."
+                "<strong>Divano</strong> es tu ecommerce de <strong>muebles en línea</strong>. Somos un equipo de cuatro apasionados programadores en pleno aprendizaje y desarrollo en el prestigioso bootcamp de Full Stack Developer de <strong>Henry</strong>. Nuestra misión es proporcionarte una <strong>experiencia de compra de muebles en linea excepcional</strong>. Hemos diseñado nuestro sitio web para que puedas buscar y renovar tus muebles favoritos de <strong>forma rápida y sencilla</strong>. Además, garantizamos la máxima seguridad de tus datos personales y de pago, para que puedas comprar con total confianza."
                 </p>
             </div>
             <h1 className={styles['tech-title']}>Used technologies:</h1>
