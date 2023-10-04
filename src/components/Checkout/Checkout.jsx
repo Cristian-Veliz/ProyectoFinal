@@ -5,6 +5,7 @@ import styles from "./Checkout.module.css";
 import {crearOrden} from "../redux/actions/Actions"
 import { useDispatch } from "react-redux";
 import Swal from 'sweetalert2';
+import {createEmail} from "../redux/actions/Actions"
 // import {loadStripe} from '@stripe/stripe-js'
 // loadStripe("pk_test_51Nuly0AVmtpsbHtkGwq84Pr5qvSyx6DNeQI2QOWYBtXCNXf1xtWqH2VHDTBmtbtPbtMTabvJvmnIGvUtN8DjCw7I00ylpAklez")
 
@@ -77,7 +78,7 @@ const Checkout = () => {
       // ordenId:ordenIdAleatorio,
       orderDate:obtenerFechaActual()
     };
-    
+    dispatch(createEmail(email))
     dispatch(crearOrden(orden))
 
     // Almacenar la orden de compra en localStorage en formato JSON
