@@ -14,16 +14,16 @@ const Footer = () => {
         <div className={styles.footerSection}>
           <h3>Preguntas Frecuentes</h3>
           <ul>
-            <li><Link to="/faq">Preguntas Frecuentes</Link></li>
-            <li><Link to="/envios">Envíos y Entregas</Link></li>
-            <li><Link to="/devoluciones">Devoluciones</Link></li>
+            <li><Link  style={{fontSize: '18px'}} to="/faq">¿Preguntas Frecuentes?</Link></li>
+            {/* <li><Link to="/envios">Envíos y Entregas</Link></li>
+            <li><Link to="/devoluciones">Devoluciones</Link></li> */}
           </ul>
         </div>
         <div className={styles.footerSection}>
           <h3>Nosotros</h3>
           <p>¿Quienes Somos?</p>
           <p>Somos DIVANO, tu tienda de muebles de vanguardia</p>
-          <p >Te invitamos a visitar nuestro <Link to='/about' className={styles.aboutLink}>About</Link></p>
+          <p >Te invitamos a visitar nuestro <Link style={{fontSize: '18px'}} to='/about' className={styles.aboutLink}>About</Link></p>
         </div>
       </div>
       <div className={styles.footerBottom}>

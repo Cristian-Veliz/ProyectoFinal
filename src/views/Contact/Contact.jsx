@@ -1,5 +1,6 @@
+/* Contact.js */
+
 import React, { useState, useRef } from 'react';
-import "./Contact.module.css"
 import styles from './Contact.module.css';
 import FooterSimple from '../../components/FooterSimple/FooterSimple';
 
@@ -63,6 +64,14 @@ const Contact = () => {
       // Aquí puedes agregar la lógica para enviar el correo electrónico
       // y luego mostrar el modal
       mostrarModal();
+
+      // Limpia los campos del formulario
+      setFormData({
+        nombre: '',
+        apellido: '',
+        email: '',
+        consulta: '',
+      });
     }
   };
 
@@ -76,53 +85,59 @@ const Contact = () => {
 
   return (
     <div className={styles.contactanos}>
-      <h3>Contacta con Nosotros</h3>
-      <p>Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. Estamos aquí para ayudarte en lo que necesites.</p>
-      <h4>Déjanos tu consulta</h4>
-      <form onSubmit={manejarEnvio} ref={datosFormulario} id='formulario' className={styles.formulario}>
-        <label>
-          Nombre:
-          <input type="text" name="nombre" value={formData.nombre} onChange={manejarCambio} />
-          {errores.nombre && <span className={styles.error}>{errores.nombre}</span>}
-        </label>
-        <label>
-          Apellido:
-          <input type="text" name="apellido" value={formData.apellido} onChange={manejarCambio} />
-          {errores.apellido && <span className={styles.error}>{errores.apellido}</span>}
-        </label>
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={manejarCambio} />
-          {errores.email && <span className={styles.error}>{errores.email}</span>}
-        </label>
-        <div id="consulta">
-          <textarea
-            placeholder="Escribe tus preguntas o comentarios aquí"
-            name="consulta"
-            value={formData.consulta}
-            onChange={manejarCambio}
-          ></textarea>
-          {errores.consulta && <span className={styles.error}>{errores.consulta}</span>}
-        </div>
-        <br />
-        <button type="submit">Enviar</button>
-      </form>
-
-      {/* Modal */}
-      {modalVisible && (
-        <div className={styles.modalContainer}>
-          <div className={styles.modal}>
-            <h2>Consulta Enviada Exitosamente</h2>
-            <p>Tu consulta se ha enviado correctamente. Nos pondremos en contacto contigo pronto.</p>
-            <button onClick={cerrarModal}>Cerrar</button>
+      <h3>Contacta con Divano</h3>
+      <p>🌟 Si tienes alguna pregunta o necesitas más información, no dudes en contactarnos. <br /> Estamos aquí para ayudarte en lo que necesites. 🌟</p>
+      <h4>Déjanos tu consulta:</h4>
+      <div>
+        <form onSubmit={manejarEnvio} ref={datosFormulario} id='formulario' className={styles.formulario}>
+          <label>
+            Nombre:
+            <input className={styles.input} type="text" name="nombre" value={formData.nombre} onChange={manejarCambio}
+              placeholder='Ingresa tu nombre...'
+            />
+            {errores.nombre && <span className={styles.error}>{errores.nombre}</span>}
+          </label>
+          <label>
+            Apellido:
+            <input className={styles.input} type="text" name="apellido" value={formData.apellido} onChange={manejarCambio}
+              placeholder='Ingresa tu apellido...'
+            />
+            {errores.apellido && <span className={styles.error}>{errores.apellido}</span>}
+          </label>
+          <label className={styles.centrar}>
+            Email:
+            <input className={styles.input} type="email" name="email" value={formData.email} onChange={manejarCambio}
+              placeholder='Ingresa tu correo de contacto...'
+            />
+            {errores.email && <span className={styles.error}>{errores.email}</span>}
+          </label>
+          <div id="consulta" className={styles.consulta}>
+            <textarea
+              placeholder="Escribe tus preguntas o comentarios aquí"
+              name="consulta"
+              value={formData.consulta}
+              onChange={manejarCambio}
+            ></textarea>
+            {errores.consulta && <span className={styles.error}>{errores.consulta}</span>}
           </div>
-        </div>
-      )}
-      <div className={styles.footer}>
-      <FooterSimple/>
+          <br />
+          <button type="submit">Enviar</button>
+        </form>
+
+        {/* Modal */}
+        {modalVisible && (
+          <div className={styles.modalContainer}>
+            <div className={styles.modal}>
+              <h2>Consulta Enviada Exitosamente</h2>
+              <p>Tu consulta se ha enviado correctamente. Nos pondremos en contacto contigo pronto.</p>
+              <button onClick={cerrarModal}>Cerrar</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default Contact;
+

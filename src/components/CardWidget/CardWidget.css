@@ -2,6 +2,7 @@
 .cart-container {
     display: inline-block;
     position: relative;
+    margin-right: 120px;
 }
 
 /* Estilo para la imagen del carrito */
@@ -12,7 +13,7 @@
 /* Estilo para el número de la cantidad */
 .contador {
     position: absolute;
-    top: -10px; /* Ajusta la posición vertical según tus necesidades */
+    top: -20px; /* Ajusta la posición vertical según tus necesidades */
     right: -10px; /* Ajusta la posición horizontal según tus necesidades */
     color: #333; /* Cambia el color del texto si es necesario */
     border-radius: 50%; /* Hace que el fondo del número sea redondo */
