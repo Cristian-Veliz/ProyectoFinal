@@ -40,9 +40,9 @@ export default function LoginGetUser() {
           <h1>User profile</h1> 
           <button>Edit profile📝</button>
         </div>
-          <p>Name: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <button onClick={handleLogout}>Log Out</button>
+        <p><strong>Name: </strong>{userData.name}</p>
+        <p><strong>Email: </strong>{userData.email}</p>
+        <button onClick={handleLogout}>Log Out</button>
           
       
       </div>

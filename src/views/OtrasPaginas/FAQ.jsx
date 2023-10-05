@@ -16,7 +16,7 @@ const Faq = () => {
           <div className={styles.accordionBody}>
             Aceptamos diversas formas de pago, como tarjetas de crédito/débito
             (Visa, Mastercard, American Express) y envío de dinero a través de
-            Mercado Pago.
+            Stripe.
           </div>
         </div>
         <div className={styles.accordionItem}>
