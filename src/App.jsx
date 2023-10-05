@@ -22,6 +22,7 @@ import Register from './components/RegisterUser/Register';
 import LoginGetUser from './views/Login/LoginGetUser';
 import { getUserInfoFromLocalStorage } from './helpers/AuthToken';
 import NavBarLanding from './components/NavBarLanding/NavBarLanding';
+import Faq from './views/OtrasPaginas/FAQ';
 
 
 
@@ -53,19 +54,13 @@ function App() {
   return (
     <div className="App">
       <CarritoProvider>
-        {/* {pathname === '/' ? null : (
-          <NavBar
-            cantidadTotal={cantidadTotal}
-            actualizarCantidadTotal={actualizarCantidadTotal}
-          />
-        )} */}
         {
           userInfo === null ? <NavBarLanding/> : <NavBar
           cantidadTotal={cantidadTotal}
           actualizarCantidadTotal={actualizarCantidadTotal}
         />
         }
-        
+    
         <Switch>
           <Route exact path='/' component={Landing} />
           <Route exact path='/home' component={Home} />
@@ -89,6 +84,7 @@ function App() {
           <Route exact path='/buy' component={CheckoutForm} /> 
           <Route exact path='/register' component={Register} /> 
           <Route exact path='/profile' component={LoginGetUser} /> 
+          <Route exact path='/faq' component={Faq}/> 
           <Route
             exact
             path='/cart'
@@ -108,33 +104,4 @@ function App() {
 }
 
 export default App;
-
-
-//agregar boton de My profile y Logout al lado izquierdo del logo del carrito, en un div aparte siguiendo el css de la nav. 
-
-
-
-
-
-// function App() {
-//   const {pathname} = useLocation();
-//   return (
-//     <div className="App">
-//       {pathname === '/' ? null : <NavBar/>  }
-//       <Switch>
-//         <Route exact path='/' component={Landing}/>
-//         <Route exact path='/home' component={Home}/>
-//         <Route exact path='/products/:id' component={Detail}/>
-//         <Route exact path='/orders' component={MyOrders}/>
-//         <Route exact path='/contact' component={Contact}/>
-//         <Route exact path='/about' component={About}/>
-//         <Route exact path='/cart' component={CardWidget}/>
-//         {/* <Route exact path='*' component={NotFound}/> */}
-//       </Switch>
-
-//     </div>
-//   );
-// }
-
-// export default App;
 
