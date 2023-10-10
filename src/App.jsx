@@ -85,7 +85,8 @@ function App() {
           <Route exact path='/buy' component={CheckoutForm} /> 
           <Route exact path='/register' component={Register} /> 
           <Route exact path='/profile' component={LoginGetUser} /> 
-          <Route exact path='/faq' component={Faq}/> 
+          <Route exact path='/faq' component={Faq}/>
+          <Route exact path='/cart' component={Cart}/> 
           <Route exact path='*' component={NotFound}/> 
 
           <Route
